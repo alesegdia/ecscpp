@@ -1,0 +1,9 @@
+bin/compile.bat
+bin/rebuild.sh
+bin/swonie
+swonie
+*~
+*.swp
+trashcan
+00
+build
