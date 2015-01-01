@@ -1,14 +1,10 @@
 00
-bin/compile.bat
-bin/rebuild.sh
-bin/swonie
-swonie
 *~
 *.swo
 *.swp
-trashcan
 00
 build
 callgrind*
 .ycm_extra_conf.py*
-testgame
+bin/
+lib/
