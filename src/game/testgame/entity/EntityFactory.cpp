@@ -1,7 +1,7 @@
 #include "EntityFactory.h"
 #include "../component/TransformComponent.h"
 #include "../component/RenderComponent.h"
-#include "EntityWorld.h"
+#include "../entity/GameWorld.h"
 #include "../component/ComponentPools.h"
 
 EntityFactory::EntityFactory()
@@ -15,7 +15,7 @@ EntityFactory::~EntityFactory()
 }
 
 
-void EntityFactory::setEntityWorld(EntityWorld* eworld)
+void EntityFactory::setEntityWorld(GameWorld* eworld)
 {
 	_eworld = eworld;
 }

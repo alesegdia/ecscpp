@@ -46,6 +46,7 @@ void GameScreen::LoadContent()
 	Locator<EntityPool>::set(&_entitypool);
 
 	_rsystem.setWindow(_window);
+	_eworld.setRenderingSystem(&_rsystem);
 	_efactory.setEntityWorld(&_eworld);
 	_spriteHolder.add("whiniethefrog.png");
 	_spriteHolder.add("persoese.gif");
@@ -115,7 +116,6 @@ void GameScreen::Update(sf::Time delta)
 
 void GameScreen::Draw(sf::RenderWindow &window)
 {
-
 	_eworld.draw();
 
 	/*

@@ -1,7 +1,7 @@
 #ifndef __ENTITYFACTORY_H__
 #define __ENTITYFACTORY_H__
 
-class EntityWorld;
+class GameWorld;
 class Entity;
 
 class EntityFactory
@@ -10,7 +10,7 @@ public:
 	EntityFactory();
 	~EntityFactory();
 
-	void setEntityWorld(EntityWorld* eworld);
+	void setEntityWorld(GameWorld* eworld);
 	Entity* makeTestEntity();
 
 private:
@@ -19,7 +19,7 @@ private:
 
 	Entity* acquireEntity();
 
-	EntityWorld* _eworld;
+	GameWorld* _eworld;
 };
 
 #endif
