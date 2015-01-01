@@ -39,7 +39,9 @@ public:
 		// se hará el casting de ComponentType* a Component*? dynamic_cast?
 		// tal vez quitar el template y dejar que lo castee automaticamente?
 		_components[std::type_index(typeid(ComponentType))] = c;
+		printf("flagsbef: %d\n", _flags);
 		_flags |= component_flags<ComponentType>::flags;
+		printf("flagsaf: %d\n", _flags);
 	}
 
 	template <typename ComponentType>

@@ -3,6 +3,7 @@ bin/rebuild.sh
 bin/swonie
 swonie
 *~
+*.swo
 *.swp
 trashcan
 00

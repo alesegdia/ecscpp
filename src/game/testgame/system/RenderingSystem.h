@@ -2,6 +2,7 @@
 #define __RENDERINGSYSTEM_H__
 
 #include <ecs/system/EntityProcessingSystem.h>
+#include "../component/ComponentFlags.h"
 #include <stdinc.h>
 
 class RenderingSystem : public EntityProcessingSystem
@@ -14,6 +15,18 @@ public:
 	~RenderingSystem()
 	{
 
+	}
+
+
+	void added(Entity* e)
+	{
+		printf("YAY!");
+		EntityProcessingSystem::added(e);
+	}
+
+	void process()
+	{
+		EntityProcessingSystem::process();
 	}
 
 	void process(Entity* e)
