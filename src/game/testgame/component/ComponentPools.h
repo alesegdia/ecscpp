@@ -1,7 +1,7 @@
 #ifndef __COMPONENTPOOLS_H__
 #define __COMPONENTPOOLS_H__
 
-#include "Pool.h"
+#include <core/memory/Pool.h>
 #include "Components.h"
 
 #define DEFAULT_POOL_SZ 128

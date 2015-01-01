@@ -1,5 +1,5 @@
 #include "PlayerComponent.h"
-#include "Locator.h"
+#include <core/util/Locator.h>
 #include "ComponentPools.h"
 
 void PlayerComponent::cleanUp()

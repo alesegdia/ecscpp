@@ -1,7 +1,7 @@
 #ifndef MYGAME_H
 #define MYGAME_H
 
-#include "Game.h"
+#include <core/game/Game.h>
 
 class Ufofrog : public Game
 {

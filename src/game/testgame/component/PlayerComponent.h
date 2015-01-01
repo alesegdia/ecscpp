@@ -1,7 +1,7 @@
 #ifndef __PLAYERCOMPONENT_H__
 #define __PLAYERCOMPONENT_H__
 
-#include "Component.h"
+#include <ecs/component/Component.h>
 
 struct PlayerComponent : public Component
 {

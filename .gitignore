@@ -9,3 +9,4 @@ trashcan
 build
 callgrind*
 .ycm_extra_conf.py*
+testgame

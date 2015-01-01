@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "SplashScreen.h"
-#include "ScreenManager.h"
+#include <core/game/screen/ScreenManager.h>
 #include "GameScreen.h"
 
 SplashScreen::SplashScreen()

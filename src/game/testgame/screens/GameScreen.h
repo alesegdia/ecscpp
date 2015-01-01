@@ -2,14 +2,14 @@
 #define GAMESCREEN_H
 
 #include <SFML/Graphics.hpp>
-#include "Screen.h"
-#include "AssetHolder.h"
-#include "EntityProcessingSystem.h"
-#include "EntityFactory.h"
-#include "ComponentPools.h"
-#include "EntityManager.h"
-#include "RenderingSystem.h"
-#include "PlayerControllerSystem.h"
+#include <core/game/screen/Screen.h>
+#include <core/assets/AssetHolder.h>
+#include <ecs/system/EntityProcessingSystem.h>
+#include "../entity/EntityFactory.h"
+#include "../component/ComponentPools.h"
+#include "../entity/EntityManager.h"
+#include "../system/RenderingSystem.h"
+#include "../system/PlayerControllerSystem.h"
 
 class GameScreen : public Screen
 {

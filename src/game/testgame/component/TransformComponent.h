@@ -2,8 +2,8 @@
 #define __TRANSFORMCOMPONENT_H__
 
 #include <SFML/System.hpp>
-#include "Component.h"
-#include "Locator.h"
+#include <ecs/component/Component.h>
+#include <core/util/Locator.h>
 
 struct TransformComponent : public Component
 {

@@ -2,9 +2,9 @@
 #define __RENDERCOMPONENT_H__
 
 #include <SFML/Graphics.hpp>
-#include "Component.h"
-#include "Locator.h"
-#include "Poolable.h"
+#include <ecs/component/Component.h>
+#include <core/util/Locator.h>
+#include <core/memory/Poolable.h>
 
 struct RenderComponent : public Component
 {

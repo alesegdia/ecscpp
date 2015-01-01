@@ -1,8 +1,8 @@
 #ifndef __RENDERINGSYSTEM_H__
 #define __RENDERINGSYSTEM_H__
 
-#include "EntityProcessingSystem.h"
-#include "stdinc.h"
+#include <ecs/system/EntityProcessingSystem.h>
+#include <stdinc.h>
 
 class RenderingSystem : public EntityProcessingSystem
 {

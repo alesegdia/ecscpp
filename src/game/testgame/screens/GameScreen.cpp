@@ -1,7 +1,7 @@
 #include "GameScreen.h"
 #include <SFML/System.hpp>
-#include "Locator.h"
-#include "Pool.h"
+#include <core/util/Locator.h>
+#include <core/memory/Pool.h>
 
 GameScreen::GameScreen()
 {

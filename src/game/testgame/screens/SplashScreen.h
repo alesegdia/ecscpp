@@ -2,7 +2,7 @@
 #define SPLASHSCREEN_H
 
 #include <SFML/Graphics.hpp>
-#include "Screen.h"
+#include <core/game/screen/Screen.h>
 
 class SplashScreen : public Screen
 {

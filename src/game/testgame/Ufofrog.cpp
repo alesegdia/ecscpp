@@ -1,6 +1,6 @@
 #include "Ufofrog.h"
-#include "ScreenManager.h"
-#include "SplashScreen.h"
+#include <core/game/screen/ScreenManager.h>
+#include "screens/SplashScreen.h"
 
 void Ufofrog::Create()
 {
