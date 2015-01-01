@@ -28,7 +28,7 @@ protected:
 private:
 	// data dup with eid
 	std::unordered_map<eid_t, Entity*> _entities;
-	//EntityManager* _emgr; //???
+	//EntityWorld* _eworld; //???
 };
 
 #endif

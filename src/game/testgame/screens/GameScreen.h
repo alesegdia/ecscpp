@@ -7,7 +7,7 @@
 #include <ecs/system/EntityProcessingSystem.h>
 #include "../entity/EntityFactory.h"
 #include "../component/ComponentPools.h"
-#include "../entity/EntityManager.h"
+#include "../entity/EntityWorld.h"
 #include "../system/RenderingSystem.h"
 #include "../system/PlayerControllerSystem.h"
 
@@ -30,7 +30,7 @@ class GameScreen : public Screen
 
 		/* Entities */
 		EntityFactory 		_efactory;
-		EntityManager		_emgr;
+		EntityWorld		_eworld;
 
 		/* Systems */
 		RenderingSystem		_rsystem;

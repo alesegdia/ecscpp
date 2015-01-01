@@ -1,5 +1,5 @@
-#ifndef __ENTITYMANAGER_H__
-#define __ENTITYMANAGER_H__
+#ifndef __EntityWorld_H__
+#define __EntityWorld_H__
 
 #include "stdinc.h"
 #include <ecs/entity/eid_t.h>
@@ -40,16 +40,16 @@ private:
 	std::stack<eid_t> _free;
 };
 
-class EntityManager
+class EntityWorld
 {
 public:
 
-	EntityManager()
+	EntityWorld()
 	{
 
 	}
 
-	~EntityManager()
+	~EntityWorld()
 	{
 
 	}
@@ -80,13 +80,13 @@ public:
 	{
 		// hace falta la variable? creo que no...
 		EntityProcessingSystem *eps;
-		RenderingSystem *rs;
+		System *rs;
 
 		if(rs = dynamic_cast<RenderingSystem*>(s))
 		{
 			// think of making a vector of renderingsystems,
 			// to enable something like a debug renderer por bboxes
-			_rendersystem = static_cast<RenderingSystem*>(s);
+			_rendersystem = s;
 		}
 		else
 		{
@@ -117,7 +117,7 @@ public:
 
 	void process()
 	{
-		std::cout << "EntityManager::process()\n";
+		std::cout << "EntityWorld::process()\n";
 		for (auto it : _systems)
 		{
 			std::cout << "Processing a system...\n";
@@ -149,7 +149,7 @@ private:
 	EIDPool _eidpool;
 	SystemVector _systems;
 	EPSystemVector _epsystems;
-	RenderingSystem* _rendersystem;
+	System* _rendersystem;
 };
 
 

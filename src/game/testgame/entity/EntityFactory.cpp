@@ -1,7 +1,7 @@
 #include "EntityFactory.h"
 #include "../component/TransformComponent.h"
 #include "../component/RenderComponent.h"
-#include "EntityManager.h"
+#include "EntityWorld.h"
 #include "../component/ComponentPools.h"
 
 EntityFactory::EntityFactory()
@@ -15,9 +15,9 @@ EntityFactory::~EntityFactory()
 }
 
 
-void EntityFactory::setEntityManager(EntityManager* emgr)
+void EntityFactory::setEntityWorld(EntityWorld* eworld)
 {
-	_emgr = emgr;
+	_eworld = eworld;
 }
 
 Entity* EntityFactory::acquireEntity()
@@ -45,7 +45,7 @@ Entity* EntityFactory::makeTestEntity()
 	entity->addComponent<TransformComponent>(tc);
 	entity->addComponent<PlayerComponent>(pc);
 
-	_emgr->pushEntity(entity);
+	_eworld->pushEntity(entity);
 
 	return entity;
 }

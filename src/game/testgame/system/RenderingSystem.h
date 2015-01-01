@@ -18,16 +18,6 @@ public:
 
 	}
 
-	void added(Entity* e)
-	{
-		EntityProcessingSystem::added(e);
-	}
-
-	void process()
-	{
-		EntityProcessingSystem::process();
-	}
-
 	void process(Entity* e)
 	{
 		RenderComponent* rc = e->getComponent<RenderComponent>();

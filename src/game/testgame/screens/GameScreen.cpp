@@ -46,11 +46,11 @@ void GameScreen::LoadContent()
 	Locator<EntityPool>::set(&_entitypool);
 
 	_rsystem.setWindow(_window);
-	_efactory.setEntityManager(&_emgr);
+	_efactory.setEntityWorld(&_eworld);
 	_spriteHolder.add("whiniethefrog.png");
 	_spriteHolder.add("persoese.gif");
-	_emgr.pushSystem(&_rsystem);
-	_emgr.pushSystem(&_pcsys);
+	_eworld.pushSystem(&_rsystem);
+	_eworld.pushSystem(&_pcsys);
 	// systems before making entities!!
 	_efactory.makeTestEntity();
 }
@@ -110,13 +110,13 @@ void GameScreen::HandleInput(sf::RenderWindow &window)
 }
 void GameScreen::Update(sf::Time delta)
 {
-	_emgr.process();
+	_eworld.process();
 }
 
 void GameScreen::Draw(sf::RenderWindow &window)
 {
 
-	_emgr.draw();
+	_eworld.draw();
 
 	/*
 	int* res = getCurrentRes();
