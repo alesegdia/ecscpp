@@ -1,8 +1,8 @@
 #ifndef __COMPONENT_H__
 #define __COMPONENT_H__
 
-#include "stdinc.h"
-#include "Poolable.h"
+#include <stdinc.h>
+#include <core/memory/Poolable.h>
 
 class Component : Poolable
 {

@@ -1,8 +1,7 @@
 #ifndef __SYSTEM_H__
 #define __SYSTEM_H__
 
-#include "ComponentFlags.h"
-#include "EntityObserver.h"
+#include <ecs/entity/EntityObserver.h>
 
 class System
 {

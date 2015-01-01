@@ -1,10 +1,10 @@
 #ifndef __ENTITYPROCESSINGSYSTEM_H__
 #define __ENTITYPROCESSINGSYSTEM_H__
 
-#include "Entity.h"
-#include "System.h"
-#include "EntityObserver.h"
-#include "ComponentFlags.h"
+#include <ecs/entity/Entity.h>
+#include <ecs/entity/EntityObserver.h>
+#include <ecs/system/System.h>
+//#include "ComponentFlags.h"
 
 class EntityProcessingSystem : public System, public EntityObserver
 {

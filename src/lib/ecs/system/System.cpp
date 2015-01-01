@@ -1,5 +1,4 @@
 #include "System.h"
-#include "ComponentFlags.h"
 
 System::System()
 {

@@ -1,8 +1,8 @@
 #ifndef __POOL_H__
 #define __POOL_H__
 
-#include "stdinc.h"
-#include "Components.h"
+#include <stdinc.h>
+//#include "Components.h"
 
 // Type must have getHandler() and setHandler();
 template<typename Type, size_t POOL_SIZE=128>

@@ -1,8 +1,9 @@
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 
 # SET SOURCES AND STUFF
-file(GLOB_RECURSE CPPs *.cpp)
-file(GLOB_RECURSE HPPs *.h)
+file(GLOB_RECURSE CORE_SRC lib/core/*)
+file(GLOB_RECURSE ECS_SRC lib/ecs/*)
+file(GLOB_RECURSE TESTGAME_SRC game/testgame/*)
 
 #set(SFML_STATIC_LIBRARIES TRUE)
 
@@ -12,48 +13,28 @@ find_package(Thor 2 REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(Boost REQUIRED)
 
-MACRO(HEADER_DIRECTORIES return_list)
-    FILE(GLOB_RECURSE new_list *.h)
-    SET(dir_list "")
-    FOREACH(file_path ${new_list})
-        GET_FILENAME_COMPONENT(dir_path ${file_path} PATH)
-        SET(dir_list ${dir_list} ${dir_path})
-    ENDFOREACH()
-    LIST(REMOVE_DUPLICATES dir_list)
-    SET(${return_list} ${dir_list})
-ENDMACRO()
-
-HEADER_DIRECTORIES(INC_DIRs)
-include_directories(${INC_DIRs})
-
 # NAME THE TARGETS
-add_executable(swonie ${CPPs} ${HPPs})
+add_executable(testgame ${CORE_SRC} ${ECS_SRC} ${TESTGAME_SRC})
 
-# OPENGL
-if(OPENGL_FOUND)
+include_directories(testgame lib)
+
+if(OPENGL_FOUND AND SFML_FOUND AND Boost_FOUND)
+
 	include_directories(${OPENGL_INCLUDE_DIR})
-	target_link_libraries(swonie ${OPENGL_LIBRARIES})
-endif(OPENGL_FOUND)
-
-# SFML
-if(SFML_FOUND)
 	include_directories(${SFML_INCLUDE_DIR})
-	target_link_libraries(swonie ${SFML_LIBRARIES})
-	message("SFML FOUND!!")
-	message(${SFML_LIBRARIES})
-endif(SFML_FOUND)
+	include_directories(${Boost_INCLUDE_DIRS})
+
+	target_link_libraries(testgame ${OPENGL_LIBRARIES})
+	target_link_libraries(testgame ${SFML_LIBRARIES})
+	target_link_libraries(testgame ${Boost_LIBRARIES})
+
+endif()
 
 # Thor
 if(THOR_FOUND)
 	include_directories(${THOR_INCLUDE_DIR})
 	target_link_libraries(swonie ${THOR_LIBRARY})
 endif(THOR_FOUND)
-
-# Boost
-if(Boost_FOUND)
-	include_directories(${Boost_INCLUDE_DIRS})
-	target_link_libraries(swonie ${Boost_LIBRARIES})
-endif(Boost_FOUND)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_HOME_DIRECTORY}/bin)
 

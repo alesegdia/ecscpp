@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "Screen.h"
+#include <core/game/screen/Screen.h>
 
 Screen::Screen()
 {

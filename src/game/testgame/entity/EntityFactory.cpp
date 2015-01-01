@@ -1,8 +1,8 @@
 #include "EntityFactory.h"
-#include "TransformComponent.h"
-#include "RenderComponent.h"
-#include "EntityManager.h"
-#include "ComponentPools.h"
+#include "../component/TransformComponent.h"
+#include "../component/RenderComponent.h"
+#include <ecs/entity/EntityManager.h>
+#include "../component/ComponentPools.h"
 
 EntityFactory::EntityFactory()
 {

@@ -1,9 +1,9 @@
 #ifndef __ASSETHOLDER_H__
 #define __ASSETHOLDER_H__
 
-#include "stdinc.h"
-#include "StringSplit.h"
-#include "LoadCallbacks.h"
+#include <stdinc.h>
+#include <core/util/StringSplit.h>
+#include <core/assets/LoadCallbacks.h>
 
 template<typename AssetType>
 class AssetHolder

@@ -3,9 +3,9 @@
 
 #include <boost/shared_ptr.hpp>
 #include <SFML/Graphics.hpp>
-#include "Screen.h"
-#include "CoreCommon.h"
-#include "Singleton.h"
+#include <core/game/screen/Screen.h>
+#include <core/CoreCommon.h>
+#include <core/util/Singleton.h>
 
 
 #define ScreenWidth 800

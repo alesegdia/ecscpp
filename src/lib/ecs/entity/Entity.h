@@ -1,12 +1,12 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
 
-#include "Component.h"
-#include "ComponentFlags.h"
-#include "Pool.h"
-#include "Poolable.h"
-#include "Locator.h"
-#include "eid_t.h"
+#include <ecs/component/Component.h>
+#include <ecs/component/ComponentFlags.h>
+#include <core/memory/Pool.h>
+#include <core/memory/Poolable.h>
+#include <core/util/Locator.h>
+#include <ecs/entity/eid_t.h>
 
 #define COMPONENTMAP_SZ 10
 

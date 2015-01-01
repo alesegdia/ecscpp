@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "ScreenManager.h"
+#include <core/game/screen/ScreenManager.h>
 
 void Game::Create()
 {
