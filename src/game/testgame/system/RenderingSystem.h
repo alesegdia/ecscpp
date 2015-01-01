@@ -8,6 +8,7 @@
 class RenderingSystem : public EntityProcessingSystem
 {
 public:
+
 	RenderingSystem()
 	{
 		setFlags(construct_flags<RenderComponent,TransformComponent>::flags);
@@ -17,10 +18,8 @@ public:
 
 	}
 
-
 	void added(Entity* e)
 	{
-		printf("YAY!");
 		EntityProcessingSystem::added(e);
 	}
 

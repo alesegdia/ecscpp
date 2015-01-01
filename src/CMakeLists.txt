@@ -13,8 +13,12 @@ find_package(Thor 2 REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(Boost REQUIRED)
 
+add_library(fwcore ${CORE_SRC})
+add_library(fwecs ${ECS_SRC})
+
 # NAME THE TARGETS
-add_executable(testgame ${CORE_SRC} ${ECS_SRC} ${TESTGAME_SRC})
+add_executable(testgame ${TESTGAME_SRC})
+target_link_libraries(testgame LINK_PUBLIC fwcore fwecs)
 
 include_directories(testgame lib)
 
@@ -37,4 +41,5 @@ if(THOR_FOUND)
 endif(THOR_FOUND)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_HOME_DIRECTORY}/bin)
+set(LIBRARY_OUTPUT_PATH ${CMAKE_HOME_DIRECTORY}/lib)
 

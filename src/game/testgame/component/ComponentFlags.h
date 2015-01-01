@@ -6,32 +6,9 @@
 #include "../component/RenderComponent.h"
 #include "../component/TransformComponent.h"
 
-/*
-class RenderComponent;
-class TransformComponent;
-class PlayerComponent;
-
-
-
-template <>
-struct component_flags<RenderComponent>
-{ static const ctflags_t flags = 0x00000001; };
-
-template <>
-struct component_flags<TransformComponent>
-{ static const ctflags_t flags = 0x00000002; };
-
-template <>
-struct component_flags<PlayerComponent>
-{ static const ctflags_t flags = 0x00000004; };
-*/
+#include "ComponentsDecl.h"
 
 typedef std::uint32_t ctflags_t;
-
-class RenderComponent;
-class TransformComponent;
-class PlayerComponent;
-
 
 template <>
 struct component_flags<RenderComponent>
@@ -59,4 +36,5 @@ struct construct_flags<First, Rest...>
 template <class T>
 struct construct_flags<T>
 { static const ctflags_t flags = component_flags<T>::flags; };
+
 #endif
