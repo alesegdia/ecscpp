@@ -49,7 +49,7 @@ void GameScreen::LoadContent()
 	_eworld.setRenderingSystem(&_rsystem);
 	_efactory.setEntityWorld(&_eworld);
 	_spriteHolder.add("whiniethefrog.png");
-	_spriteHolder.add("persoese.gif");
+	_spriteHolder.add("nosghy-main-sheet.png");
 	_eworld.pushSystem(&_rsystem);
 	_eworld.pushSystem(&_pcsys);
 	// systems before making entities!!

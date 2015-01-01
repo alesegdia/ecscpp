@@ -33,15 +33,32 @@ public:
 		return _eid;
 	}
 
+	template <typename SomeComponent>
+	void SetFlag()
+	{
+		this->_flags |= component_flags<SomeComponent>::flags;
+	}
+
+	template <typename SomeComponent>
+	void UnsetFlag()
+	{
+		this->_flags &= ~component_flags<SomeComponent>::flags;
+	}
+
+	void OnCreate()
+	{
+		SetFlag<AliveComponent>();
+		SetFlag<ActiveComponent>();
+	}
+
 	template <typename ComponentType>
 	void addComponent(ComponentType* c)
 	{
 		// se hará el casting de ComponentType* a Component*? dynamic_cast?
 		// tal vez quitar el template y dejar que lo castee automaticamente?
 		_components[std::type_index(typeid(ComponentType))] = c;
-		printf("flagsbef: %d\n", _flags);
-		_flags |= component_flags<ComponentType>::flags;
-		printf("flagsaf: %d\n", _flags);
+		SetFlag<ComponentType>();
+		//_flags |= component_flags<ComponentType>::flags;
 	}
 
 	template <typename ComponentType>
@@ -91,6 +108,34 @@ public:
 		clearComponents();
 		Locator<Pool<Entity>>::get()->release(_poolHandler);
 	}
+
+	void SetActive( bool active )
+	{
+		if( active ) SetFlag<ActiveComponent>();
+		else UnsetFlag<ActiveComponent>();
+	}
+
+	void Destroy()
+	{
+		UnsetFlag<AliveComponent>();
+	}
+
+	template <typename SomeComponent>
+	bool IsFlagActive()
+	{
+		return _flags & component_flags<SomeComponent>::flags;
+	}
+
+	bool IsAlive()
+	{
+		return IsFlagActive<AliveComponent>();
+	}
+
+	bool IsActive()
+	{
+		return IsFlagActive<ActiveComponent>();
+	}
+
 
 private:
 	std::unordered_map<std::type_index,Component*> _components;

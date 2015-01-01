@@ -22,7 +22,9 @@ void EntityFactory::setEntityWorld(GameWorld* eworld)
 
 Entity* EntityFactory::acquireEntity()
 {
-	return Locator<Pool<Entity>>::get()->acquire();
+	Entity* ret = Locator<Pool<Entity>>::get()->acquire();
+	ret->OnCreate();
+	return ret;
 }
 
 template<typename ComponentType>
@@ -38,7 +40,7 @@ Entity* EntityFactory::makeTestEntity()
 	TransformComponent* tc = acquireComponent<TransformComponent>();
 	PlayerComponent* pc = acquireComponent<PlayerComponent>();
 
-	rc->loadFromFile("persoese.gif");
+	rc->loadFromFile("nosghy-main-sheet.png");
 	tc->setPosition(0,0);
 
 	entity->addComponent<RenderComponent>(rc);
