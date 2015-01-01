@@ -1,0 +1,3 @@
+[submodule "thirdparty/tmxparser"]
+	path = thirdparty/tmxparser
+	url = git@github.com:alesegdia/tmxparser.git
