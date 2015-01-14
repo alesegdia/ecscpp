@@ -79,3 +79,45 @@ bitset class instead of using a plain integer (**cflags_t**).
 
 * Create a script that generates the *components/ComponentFlags.h*
 file instead of having to fill it manually.
+
+
+# Component creation
+
+Here are the steps to create a component from scratch. It's currently very messy, a script could help.
+
+1. Create MyComponent.h and MyComponent.cpp inheriting from Component.
+
+2. Define its flags in ComponentFlags.h
+
+```
+#include "./<path>/MyComponent.h"
+
+[...]
+
+template <>
+struct component_flags<MyComponent>
+{ static const ctflags_t flags = 0x12345678; };
+```
+
+3. Define its pool in ComponentPools.h
+
+```
+typedef Pool<MyComponent,pool_size<MyComponent>::size> CMyCompPool;
+```
+
+4. Define its forwarding in ComponentsDecl.h
+
+```class MyComponent;```
+
+5. Include its header at Components.h
+
+```#include "MyComponent.h"```
+
+5. Create the pool wherever and notify the Locator
+
+```
+CMyCompPool cmycomppool;
+Locator<MyComponent>::set(&cmycomppoll);
+```
+
+

@@ -4,6 +4,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 file(GLOB_RECURSE CORE_SRC lib/core/*)
 file(GLOB_RECURSE ECS_SRC lib/ecs/*)
 file(GLOB_RECURSE TESTGAME_SRC game/testgame/*)
+file(GLOB_RECURSE SHOOTGAME_SRC game/shootgame/*)
 
 #set(SFML_STATIC_LIBRARIES TRUE)
 
@@ -20,7 +21,11 @@ add_library(fwecs ${ECS_SRC})
 add_executable(testgame ${TESTGAME_SRC})
 target_link_libraries(testgame LINK_PUBLIC fwcore fwecs)
 
+add_executable(shootgame ${SHOOTGAME_SRC})
+target_link_libraries(shootgame LINK_PUBLIC fwcore fwecs)
+
 include_directories(testgame lib)
+include_directories(shootgame lib)
 
 if(OPENGL_FOUND AND SFML_FOUND AND Boost_FOUND)
 
@@ -31,6 +36,10 @@ if(OPENGL_FOUND AND SFML_FOUND AND Boost_FOUND)
 	target_link_libraries(testgame ${OPENGL_LIBRARIES})
 	target_link_libraries(testgame ${SFML_LIBRARIES})
 	target_link_libraries(testgame ${Boost_LIBRARIES})
+
+	target_link_libraries(shootgame ${OPENGL_LIBRARIES})
+	target_link_libraries(shootgame ${SFML_LIBRARIES})
+	target_link_libraries(shootgame ${Boost_LIBRARIES})
 
 endif()
 
