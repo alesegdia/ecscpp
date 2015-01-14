@@ -10,7 +10,7 @@ class Game
 {
     public:
         Game(int wWidth, int wHeight, std::string name) :
-            mWindow(sf::VideoMode(wWidth, wHeight), name, sf::Style::Fullscreen) {}
+            mWindow(sf::VideoMode(wWidth, wHeight), name, sf::Style::None) {}
         virtual ~Game() {}
 
         void Run();

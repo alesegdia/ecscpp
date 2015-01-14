@@ -1,8 +1,8 @@
-#include "Ufofrog.h"
+#include "TestGame.h"
 
 int main()
 {
-    Ufofrog game;
+    TestGame game;
     game.Run();
 
     return 0;

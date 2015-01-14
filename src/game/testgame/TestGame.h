@@ -3,11 +3,11 @@
 
 #include <core/game/Game.h>
 
-class Ufofrog : public Game
+class TestGame : public Game
 {
     public:
-        Ufofrog() : Game(1360, 768, "BobFury") {}
-        virtual ~Ufofrog() {}
+        TestGame() : Game(1360, 768, "TestGame") {}
+        virtual ~TestGame() {}
 
         void Create();
 

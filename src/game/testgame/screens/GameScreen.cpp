@@ -73,7 +73,7 @@ void GameScreen::HandleInput(sf::RenderWindow &window)
 		int* res = getCurrentRes();
 		window.create(
 				sf::VideoMode(res[0], res[1]),
-				"olaqase", sf::Style::Fullscreen);
+				"olaqase", sf::Style::None);
 	}
 	else if(isDown(Num2))
 	{
@@ -81,7 +81,7 @@ void GameScreen::HandleInput(sf::RenderWindow &window)
 		int* res = getCurrentRes();
 		window.create(
 				sf::VideoMode(res[0], res[1]),
-				"olaqase", sf::Style::Fullscreen);
+				"olaqase", sf::Style::None);
 	}
 	else if(isDown(Num3))
 	{
@@ -89,7 +89,7 @@ void GameScreen::HandleInput(sf::RenderWindow &window)
 		int* res = getCurrentRes();
 		window.create(
 				sf::VideoMode(res[0], res[1]),
-				"olaqase", sf::Style::Fullscreen);
+				"olaqase", sf::Style::None);
 	}
 	else if(isDown(Num4))
 	{
@@ -97,7 +97,7 @@ void GameScreen::HandleInput(sf::RenderWindow &window)
 		int* res = getCurrentRes();
 		window.create(
 				sf::VideoMode(res[0], res[1]),
-				"olaqase", sf::Style::Fullscreen);
+				"olaqase", sf::Style::None);
 	}
 	else if(isDown(Num5))
 	{
@@ -105,7 +105,7 @@ void GameScreen::HandleInput(sf::RenderWindow &window)
 		int* res = getCurrentRes();
 		window.create(
 				sf::VideoMode(res[0], res[1]),
-				"olaqase", sf::Style::Fullscreen);
+				"olaqase", sf::Style::None);
 	}
 
 }
