@@ -44,6 +44,7 @@ class GameScreen : public Screen
 		CPlayerPool			_cplayerpool;
 		EntityPool			_entitypool;
 		CSpeedPool			_cspeedpool;
+		CPhysicPool			_cphysicpool;
 
 };
 

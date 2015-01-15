@@ -22,6 +22,7 @@ public:
 	{
 		RenderComponent* rc = e->getComponent<RenderComponent>();
 		TransformComponent* tc = e->getComponent<TransformComponent>();
+		rc->getSprite()->setPosition(tc->_position.x, tc->_position.y);
 		std::cout << "RENDERING COMPONENT! " << rc->getSprite()->getLocalBounds().width << "\n";
 
 		_window->draw(*(rc->getSprite()));

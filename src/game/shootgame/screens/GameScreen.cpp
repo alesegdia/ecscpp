@@ -12,30 +12,6 @@ GameScreen::~GameScreen()
     //dtor
 }
 
-int currentRes=0;
-#define NRES 5
-int resolutions[NRES][2] =
-{
-	{ 1360, 768 },
-	{ 1024, 768 },
-	{  800, 600 },
-	{  640, 480 },
-	{  400, 300 }
-};
-int* getNextRes()
-{
-	currentRes = (++currentRes)%NRES;
-	return resolutions[currentRes];
-}
-int* getCurrentRes()
-{
-	return resolutions[currentRes];
-}
-void setCurrentRes(int cres)
-{
-	currentRes = cres;
-}
-
 void GameScreen::LoadContent()
 {
 	// set pools
@@ -43,19 +19,23 @@ void GameScreen::LoadContent()
 	Locator<CRenderPool>::set(&_crenderpool);
 	Locator<CTransformPool>::set(&_ctransfpool);
 	Locator<CPlayerPool>::set(&_cplayerpool);
+	Locator<CPhysicPool>::set(&_cphysicpool);
 	Locator<CSpeedPool>::set(&_cspeedpool);
 	Locator<EntityPool>::set(&_entitypool);
 
 	_rsystem.setWindow(_window);
 	_eworld.setRenderingSystem(&_rsystem);
 	_efactory.setEntityWorld(&_eworld);
-	//_spriteHolder.add("whiniethefrog.png");
+
 	_spriteHolder.add("sheet.png");
-	_spriteHolder.add("nosghy-main-sheet.png");
+
 	_eworld.pushSystem(&_rsystem);
 	_eworld.pushSystem(&_pcsys);
+
 	// systems before making entities!!
-	_efactory.makeTestEntity();
+	_efactory.MakePlayer(300,300);
+	_efactory.SpawnEnemyCircle(100,100);
+	_efactory.SpawnEnemyDiamond(200,100);
 }
 
 void GameScreen::UnloadContent()
@@ -78,24 +58,4 @@ void GameScreen::Update(sf::Time delta)
 void GameScreen::Draw(sf::RenderWindow &window)
 {
 	_eworld.draw();
-
-	/*
-	int* res = getCurrentRes();
-	text.setString(res[0] + "x" + res[1]);
-	text.setPosition(0,0);
-	//std::cout << res[0] << ", " << res[1] << std::endl;
-	mView.setSize(sf::Vector2f(res[0], res[1]));
-	mView.setCenter(sf::Vector2f(0,0));
-    mView.setViewport(sf::FloatRect(0.f, 0.f, -1.f, -1.f));
-    window.setView(mView);
-    sprite2->setPosition(-200, -150);
-    sprite2->setOrigin(
-    		sprite2->getLocalBounds().width/2,
-    		sprite2->getLocalBounds().height/2);
-    sprite2->rotate(1);
-    sprite1->setPosition(-50,-150);
-    window.draw(*sprite1);
-    window.draw(*sprite2);
-    window.draw(text);
-    */
 }

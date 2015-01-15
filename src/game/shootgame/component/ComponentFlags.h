@@ -3,9 +3,7 @@
 
 #include <cstdint>
 #include <ecs/component/ComponentFlags.h>
-#include "../component/RenderComponent.h"
-#include "../component/TransformComponent.h"
-#include "../component/SpeedComponent.h"
+#include "Components.h"
 
 #include "ComponentsDecl.h"
 

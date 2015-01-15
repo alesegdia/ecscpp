@@ -85,35 +85,34 @@ file instead of having to fill it manually.
 
 Here are the steps to create a component from scratch. It's currently very messy, a script could help.
 
-1. Create MyComponent.h and MyComponent.cpp inheriting from Component.
+1. Create MyComponent.h and MyComponent.cpp inheriting from Component. **Don't forget to cleanUp() itself! but also think on moving this logic.**
 
-2. Define its flags in ComponentFlags.h
+2. Define its flags in ComponentFlags.h **[GENERATE]**
 
 ```
-#include "./<path>/MyComponent.h"
-
-[...]
-
 template <>
 struct component_flags<MyComponent>
 { static const ctflags_t flags = 0x12345678; };
 ```
 
-3. Define its pool in ComponentPools.h
+3. Define its pool in ComponentPools.h **[GENERATE]**
+
 
 ```
 typedef Pool<MyComponent,pool_size<MyComponent>::size> CMyCompPool;
 ```
 
-4. Define its forwarding in ComponentsDecl.h
+4. Define its forwarding in ComponentsDecl. h**[GENERATE]**
+
 
 ```class MyComponent;```
 
-5. Include its header at Components.h
+5. Include its header at Components.h **[GENERATE]**
+
 
 ```#include "MyComponent.h"```
 
-5. Create the pool wherever and notify the Locator
+5. Create the pool wherever and notify the Locator **[Move to somewhere and GENERATE]**
 
 ```
 CMyCompPool cmycomppool;

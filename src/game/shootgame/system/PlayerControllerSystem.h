@@ -1,6 +1,8 @@
 #ifndef __PLAYERCONTROLLERSYSTEM_H__
 #define __PLAYERCONTROLLERSYSTEM_H__
 
+#include "../component/TransformComponent.h"
+
 class PlayerControllerSystem : public EntityProcessingSystem
 {
 public:
@@ -11,25 +13,29 @@ public:
 
 	void process(Entity *e)
 	{
-		RenderComponent* rc =
-			e->getComponent<RenderComponent>();
+		TransformComponent* rc =
+			e->getComponent<TransformComponent>();
 
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		int dx, dy;
+		dx = dy = 0;
+
+		bool left, right, up, down;
+		left = sf::Keyboard::isKeyPressed(sf::Keyboard::Left);
+		right = sf::Keyboard::isKeyPressed(sf::Keyboard::Right);
+		up = sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
+		down = sf::Keyboard::isKeyPressed(sf::Keyboard::Down);
+
+		if( (left&&!right) || (!left&&right) )
 		{
-			rc->getSprite()->move(-1,0);
+			dx = (left?-1:1);
 		}
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		if( (up&&!down) || (!up&&down) )
 		{
-			rc->getSprite()->move(1,0);
+			dy = (up?-1:1);
 		}
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		{
-			rc->getSprite()->move(0,-1);
-		}
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		{
-			rc->getSprite()->move(0,1);
-		}
+
+		rc->_position.x += dx;
+		rc->_position.y += dy;
 	}
 
 private:

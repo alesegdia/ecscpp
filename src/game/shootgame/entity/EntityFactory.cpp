@@ -34,7 +34,7 @@ ComponentType* EntityFactory::acquireComponent()
 	return Locator<Pool<ComponentType, pool_size<ComponentType>::size>>::get()->acquire();
 }
 
-Entity* EntityFactory::makeTestEntity()
+Entity* EntityFactory::MakePlayer( float x, float y )
 {
 	Entity* entity = acquireEntity();
 	RenderComponent* rc = acquireComponent<RenderComponent>();
@@ -44,11 +44,51 @@ Entity* EntityFactory::makeTestEntity()
 
 	rc->loadFromFile("sheet.png");
 	rc->SetRect(sf::IntRect(0,0,32,32));
-	tc->setPosition(0,0);
+	tc->setPosition(x,y);
 
 	entity->addComponent<RenderComponent>(rc);
 	entity->addComponent<TransformComponent>(tc);
 	entity->addComponent<PlayerComponent>(pc);
+
+	_eworld->pushEntity(entity);
+
+	return entity;
+}
+
+Entity* EntityFactory::SpawnEnemyCircle( float x, float y )
+{
+	Entity* entity = acquireEntity();
+	RenderComponent* rc = acquireComponent<RenderComponent>();
+	TransformComponent* tc = acquireComponent<TransformComponent>();
+	PhysicComponent* pc = acquireComponent<PhysicComponent>();
+
+	rc->loadFromFile("sheet.png");
+	rc->SetRect(sf::IntRect(32,32,32,32));
+	tc->setPosition(x,y);
+
+	entity->addComponent<RenderComponent>(rc);
+	entity->addComponent<TransformComponent>(tc);
+	entity->addComponent<PhysicComponent>(pc);
+
+	_eworld->pushEntity(entity);
+
+	return entity;
+}
+
+Entity* EntityFactory::SpawnEnemyDiamond( float x, float y )
+{
+	Entity* entity = acquireEntity();
+	RenderComponent* rc = acquireComponent<RenderComponent>();
+	TransformComponent* tc = acquireComponent<TransformComponent>();
+	PhysicComponent* pc = acquireComponent<PhysicComponent>();
+
+	rc->loadFromFile("sheet.png");
+	rc->SetRect(sf::IntRect(0,32,32,32));
+	tc->setPosition(x,y);
+
+	entity->addComponent<RenderComponent>(rc);
+	entity->addComponent<TransformComponent>(tc);
+	entity->addComponent<PhysicComponent>(pc);
 
 	_eworld->pushEntity(entity);
 
