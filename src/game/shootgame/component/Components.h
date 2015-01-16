@@ -1,10 +1,7 @@
-#ifndef __COMPONENTS_H__
-#define __COMPONENTS_H__
+#pragma once
 
 #include "RenderComponent.h"
 #include "TransformComponent.h"
 #include "PlayerComponent.h"
-#include "PhysicComponent.h"
-#include "SpeedComponent.h"
-
-#endif
+#include "RigidBodyComponent.h"
+#include "ShapeComponent.h"

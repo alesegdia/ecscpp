@@ -16,11 +16,6 @@ void GameScreen::LoadContent()
 {
 	// set pools
 	Locator<ImageHolder>::set(&_spriteHolder);
-	Locator<CRenderPool>::set(&_crenderpool);
-	Locator<CTransformPool>::set(&_ctransfpool);
-	Locator<CPlayerPool>::set(&_cplayerpool);
-	Locator<CPhysicPool>::set(&_cphysicpool);
-	Locator<CSpeedPool>::set(&_cspeedpool);
 	Locator<EntityPool>::set(&_entitypool);
 
 	_rsystem.setWindow(_window);

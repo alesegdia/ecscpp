@@ -1,33 +1,32 @@
-#ifndef __COMPONENTFLAGS_H__
-#define __COMPONENTFLAGS_H__
+
+#pragma once
 
 #include <cstdint>
 #include <ecs/component/ComponentFlags.h>
 #include "Components.h"
-
 #include "ComponentsDecl.h"
 
 typedef std::uint32_t ctflags_t;
 
 template <>
 struct component_flags<RenderComponent>
-{ static const ctflags_t flags = 0x00000001; };
+{ static const ctflags_t flags = 1; };
 
 template <>
 struct component_flags<TransformComponent>
-{ static const ctflags_t flags = 0x00000002; };
+{ static const ctflags_t flags = 2; };
 
 template <>
 struct component_flags<PlayerComponent>
-{ static const ctflags_t flags = 0x00000004; };
+{ static const ctflags_t flags = 4; };
 
 template <>
-struct component_flags<PhysicComponent>
-{ static const ctflags_t flags = 0x00000008; };
+struct component_flags<RigidBodyComponent>
+{ static const ctflags_t flags = 8; };
 
 template <>
-struct component_flags<SpeedComponent>
-{ static const ctflags_t flags = 0x00000010; };
+struct component_flags<ShapeComponent>
+{ static const ctflags_t flags = 16; };
 
 template <class... Ts>
 struct construct_flags;
@@ -43,5 +42,3 @@ struct construct_flags<First, Rest...>
 template <class T>
 struct construct_flags<T>
 { static const ctflags_t flags = component_flags<T>::flags; };
-
-#endif

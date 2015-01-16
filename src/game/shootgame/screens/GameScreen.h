@@ -7,11 +7,12 @@
 #include <ecs/system/EntityProcessingSystem.h>
 #include "../entity/EntityFactory.h"
 #include "../component/ComponentPools.h"
+#include "../component/ComponentPoolHolder.h"
 #include "../component/Components.h"
-#include "../component/SpeedComponent.h"
 #include "../entity/GameWorld.h"
 #include "../system/RenderingSystem.h"
 #include "../system/PlayerControllerSystem.h"
+
 
 class GameScreen : public Screen
 {
@@ -31,20 +32,15 @@ class GameScreen : public Screen
     	AssetHolder<sf::Image> _spriteHolder;
 
 		/* Entities */
+		EntityPool 			_entitypool;
 		EntityFactory 		_efactory;
 		GameWorld			_eworld;
+		ComponentPoolHolder _poolholder;
 
 		/* Systems */
 		RenderingSystem		_rsystem;
 		PlayerControllerSystem _pcsys;
 
-		/* Pools */
-		CRenderPool			_crenderpool;
-		CTransformPool		_ctransfpool;
-		CPlayerPool			_cplayerpool;
-		EntityPool			_entitypool;
-		CSpeedPool			_cspeedpool;
-		CPhysicPool			_cphysicpool;
 
 };
 

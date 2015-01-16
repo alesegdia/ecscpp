@@ -3,7 +3,7 @@
 
 #include <ecs/component/Component.h>
 
-struct PhysicComponent : public Component
+struct RigidBodyComponent : public Component
 {
 };
 
