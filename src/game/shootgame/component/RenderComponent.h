@@ -22,6 +22,7 @@ struct RenderComponent : public Component
 	/* Fields */
 	sf::Sprite _sprite;
 	sf::Texture _tex;
+	int z_order = 1; // higher, deeper
 };
 
 #endif

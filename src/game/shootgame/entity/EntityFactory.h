@@ -14,6 +14,7 @@ public:
 	Entity* MakePlayer(float x, float y);
 	Entity* SpawnEnemyCircle( float x, float y );
 	Entity* SpawnEnemyDiamond( float x, float y );
+	Entity* SpawnBlock( float x, float y );
 
 private:
 	template<typename ComponentType>

@@ -19,10 +19,10 @@ SplashScreen::~SplashScreen()
 
 void SplashScreen::LoadContent()
 {
-    if(!mFont.loadFromFile("Font1.ttf"))
+    if(!mFont.loadFromFile("PressStart2P.ttf"))
         std::cout << "Could not find specified font" << std::endl;
 
-    mText.setString("Swonie... let Wave");
+    mText.setString("");
     mText.setCharacterSize(100);
     mText.setFont(mFont);
 }

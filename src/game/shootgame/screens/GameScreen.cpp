@@ -14,6 +14,7 @@ GameScreen::~GameScreen()
 
 void GameScreen::LoadContent()
 {
+
 	// set pools
 	Locator<ImageHolder>::set(&_spriteHolder);
 	Locator<EntityPool>::set(&_entitypool);
@@ -23,14 +24,23 @@ void GameScreen::LoadContent()
 	_efactory.setEntityWorld(&_eworld);
 
 	_spriteHolder.add("sheet.png");
+	_spriteHolder.add("bbreaker.png");
 
 	_eworld.pushSystem(&_rsystem);
 	_eworld.pushSystem(&_pcsys);
 
-	// systems before making entities!!
 	_efactory.MakePlayer(300,300);
+	for( int i = 0; i < 10; i++ )
+	for( int j = 0; j < 10; j++ )
+	{
+		_efactory.SpawnBlock(200 + i * 32, 200 + j * 32);
+	}
+
+	// systems before making entities!!
 	_efactory.SpawnEnemyCircle(100,100);
-	_efactory.SpawnEnemyDiamond(200,100);
+	Entity* e = _efactory.SpawnEnemyDiamond(200,100);
+
+	//_eworld.deleteEntity(e);
 }
 
 void GameScreen::UnloadContent()

@@ -42,8 +42,9 @@ Entity* EntityFactory::MakePlayer( float x, float y )
 	PlayerComponent* pc = acquireComponent<PlayerComponent>();
 
 
-	rc->loadFromFile("sheet.png");
-	rc->SetRect(sf::IntRect(0,0,32,32));
+	rc->loadFromFile("bbreaker.png");
+	rc->z_order = 0;
+	rc->SetRect(sf::IntRect(0,32,32,32));
 	tc->setPosition(x,y);
 
 	entity->addComponent<RenderComponent>(rc);
@@ -89,6 +90,24 @@ Entity* EntityFactory::SpawnEnemyDiamond( float x, float y )
 	entity->addComponent<RenderComponent>(rc);
 	entity->addComponent<TransformComponent>(tc);
 	entity->addComponent<RigidBodyComponent>(pc);
+
+	_eworld->pushEntity(entity);
+
+	return entity;
+}
+
+Entity* EntityFactory::SpawnBlock( float x, float y )
+{
+	Entity* entity = acquireEntity();
+	RenderComponent* rc = acquireComponent<RenderComponent>();
+	TransformComponent* tc = acquireComponent<TransformComponent>();
+
+	rc->loadFromFile("bbreaker.png");
+	rc->SetRect(sf::IntRect(32,0,32,32));
+	tc->setPosition(x,y);
+
+	entity->addComponent<RenderComponent>(rc);
+	entity->addComponent<TransformComponent>(tc);
 
 	_eworld->pushEntity(entity);
 
