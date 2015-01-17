@@ -23,21 +23,14 @@ void EntityProcessingSystem::process()
 	}
 }
 
-void EntityProcessingSystem::setFlags(ctflags_t flags)
+void EntityProcessingSystem::addEntity(Entity* e)
 {
-	_flags = flags;
+	_entities[e->getEID()] = e;
 }
 
-void EntityProcessingSystem::added(Entity* e)
-{
-	if(e->validateFlags(_flags))
-		_entities[e->getEID()] = e;
-}
-
-void EntityProcessingSystem::deleted(Entity* e)
+void EntityProcessingSystem::rmEntity(Entity* e)
 {
 	// ask in #gamedev, #c++ says vector until benchmarking
-	if(e->validateFlags(_flags))
-		_entities.erase(e->getEID());
+	_entities.erase(e->getEID());
 }
 
