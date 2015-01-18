@@ -1,7 +1,7 @@
 #ifndef __PLAYERCONTROLLERSYSTEM_H__
 #define __PLAYERCONTROLLERSYSTEM_H__
 
-#include "../component/TransformComponent.h"
+#include "../component/Components.h"
 
 class PlayerControllerSystem : public EntityProcessingSystem
 {
@@ -15,6 +15,8 @@ public:
 	{
 		TransformComponent* rc =
 			e->getComponent<TransformComponent>();
+		PhysicComponent* phc =
+			e->getComponent<PhysicComponent>();
 
 		int dx, dy;
 		dx = dy = 0;
@@ -34,8 +36,10 @@ public:
 			dy = (up?-1:1);
 		}
 
+
 		rc->_position.x += dx;
 		rc->_position.y += dy;
+		phc->body->SetLinearVelocity( b2Vec2(dx, dy) );
 	}
 
 private:

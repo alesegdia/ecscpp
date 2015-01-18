@@ -22,7 +22,7 @@ void GameScreen::LoadContent()
 
 	_rsystem.Prepare(_window);
 	_eworld.setRenderingSystem(&_rsystem);
-	_efactory.setEntityWorld(&_eworld);
+	_efactory.Prepare(&_eworld, &_physics);
 
 	_spriteHolder.add("sheet.png");
 	_spriteHolder.add("bbreaker.png");
@@ -41,8 +41,8 @@ void GameScreen::LoadContent()
 	}
 
 	// systems before making entities!!
-	_efactory.SpawnEnemyCircle(100,100);
-	Entity* e = _efactory.SpawnEnemyDiamond(200,100);
+	//_efactory.SpawnEnemyCircle(100,100);
+	//Entity* e = _efactory.SpawnEnemyDiamond(200,100);
 
 	//_eworld.deleteEntity(e);
 }
@@ -59,6 +59,7 @@ void GameScreen::HandleInput(sf::RenderWindow &window)
     if(isDown(Escape))
         window.close();
 }
+
 void GameScreen::Update(sf::Time delta)
 {
 	_eworld.process();
@@ -66,5 +67,6 @@ void GameScreen::Update(sf::Time delta)
 
 void GameScreen::Draw(sf::RenderWindow &window)
 {
-	_eworld.draw();
+	_rsystem.draw();
 }
+

@@ -6,7 +6,7 @@
 #include <stdinc.h>
 #include <list>
 
-class RenderingSystem : public EntityProcessingSystem
+class RenderingSystem : public EntitySystem
 {
 public:
 
@@ -17,6 +17,8 @@ public:
 
 	void process(Entity* e);
 	void process() override;
+
+	void draw();
 
 	void Prepare(sf::RenderWindow *window);
 

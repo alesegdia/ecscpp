@@ -3,6 +3,7 @@
 
 class GameWorld;
 class Entity;
+class Physics;
 
 class EntityFactory
 {
@@ -10,11 +11,12 @@ public:
 	EntityFactory();
 	~EntityFactory();
 
-	void setEntityWorld(GameWorld* eworld);
+	void Prepare( GameWorld* eworld, Physics* physics );
 	Entity* MakePlayer(float x, float y);
-	Entity* SpawnEnemyCircle( float x, float y );
-	Entity* SpawnEnemyDiamond( float x, float y );
 	Entity* SpawnBlock( float x, float y );
+
+	// Entity* SpawnEnemyCircle( float x, float y );
+	// Entity* SpawnEnemyDiamond( float x, float y );
 
 private:
 	template<typename ComponentType>
@@ -23,6 +25,7 @@ private:
 	Entity* acquireEntity();
 
 	GameWorld* _eworld;
+	Physics* _physics;
 };
 
 #endif
