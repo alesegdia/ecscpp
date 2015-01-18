@@ -3,8 +3,7 @@
 	{ "name": "Render" },
 	{ "name": "Transform" },
 	{ "name": "Player" },
-	{ "name": "RigidBody" },
-	{ "name": "Shape" }
+	{ "name": "Physic" }
 ]
 
 
