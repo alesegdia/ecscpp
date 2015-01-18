@@ -8,6 +8,14 @@
 
 struct RenderComponent : public Component
 {
+	enum ZOrder {
+		ZORDER_0 = 0,
+		ZORDER_1,
+		ZORDER_2
+	};
+
+	static constexpr int NUM_ZORDERS = 3;
+
 	/* Helpers and accesors */
 	void loadFromFile(const char* file);
 	sf::Sprite* getSprite();
@@ -22,7 +30,7 @@ struct RenderComponent : public Component
 	/* Fields */
 	sf::Sprite _sprite;
 	sf::Texture _tex;
-	int z_order = 1; // higher, deeper
+	ZOrder zorder = ZORDER_1;
 };
 
 #endif

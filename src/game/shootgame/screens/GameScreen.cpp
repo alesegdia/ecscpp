@@ -20,7 +20,7 @@ void GameScreen::LoadContent()
 	Locator<EntityPool>::set(&_entitypool);
 	Locator<Physics>::set(&_physics);
 
-	_rsystem.setWindow(_window);
+	_rsystem.Prepare(_window);
 	_eworld.setRenderingSystem(&_rsystem);
 	_efactory.setEntityWorld(&_eworld);
 

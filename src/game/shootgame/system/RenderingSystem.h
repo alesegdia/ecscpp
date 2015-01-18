@@ -4,36 +4,31 @@
 #include <ecs/system/EntityProcessingSystem.h>
 #include "../component/ComponentFlags.h"
 #include <stdinc.h>
+#include <list>
 
 class RenderingSystem : public EntityProcessingSystem
 {
 public:
 
-	RenderingSystem()
-	{
-		setFlags(construct_flags<RenderComponent,TransformComponent>::flags);
-	}
-	~RenderingSystem()
-	{
 
-	}
+	RenderingSystem();
+	~RenderingSystem();
 
-	void process(Entity* e)
-	{
-		RenderComponent* rc = e->getComponent<RenderComponent>();
-		TransformComponent* tc = e->getComponent<TransformComponent>();
-		rc->getSprite()->setPosition(tc->_position.x, tc->_position.y);
 
-		_window->draw(*(rc->getSprite()));
-	}
+	void process(Entity* e);
+	void process() override;
 
-	void setWindow(sf::RenderWindow *window)
-	{
-		_window = window;
-	}
+	void Prepare(sf::RenderWindow *window);
+
+	void RenderList( RenderComponent::ZOrder order );
 
 private:
+
+	void addEntity(Entity* e) override;
+	void rmEntity(Entity* e) override;
+
 	sf::RenderWindow* _window;
+	std::list<Entity*> _renderLists[RenderComponent::NUM_ZORDERS];
 };
 
 #endif

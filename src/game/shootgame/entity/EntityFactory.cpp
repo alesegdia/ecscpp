@@ -43,7 +43,7 @@ Entity* EntityFactory::MakePlayer( float x, float y )
 
 
 	rc->loadFromFile("bbreaker.png");
-	rc->z_order = 0;
+	rc->zorder = RenderComponent::ZORDER_2;
 	rc->SetRect(sf::IntRect(0,32,32,32));
 	tc->setPosition(x,y);
 
