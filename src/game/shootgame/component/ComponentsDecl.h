@@ -3,5 +3,4 @@
 class RenderComponent;
 class TransformComponent;
 class PlayerComponent;
-class RigidBodyComponent;
-class ShapeComponent;
+class PhysicComponent;

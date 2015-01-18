@@ -13,5 +13,4 @@ struct pool_size
 typedef Pool<RenderComponent,pool_size<RenderComponent>::size> CRenderPool;
 typedef Pool<TransformComponent,pool_size<TransformComponent>::size> CTransformPool;
 typedef Pool<PlayerComponent,pool_size<PlayerComponent>::size> CPlayerPool;
-typedef Pool<RigidBodyComponent,pool_size<RigidBodyComponent>::size> CRigidBodyPool;
-typedef Pool<ShapeComponent,pool_size<ShapeComponent>::size> CShapePool;
+typedef Pool<PhysicComponent,pool_size<PhysicComponent>::size> CPhysicPool;

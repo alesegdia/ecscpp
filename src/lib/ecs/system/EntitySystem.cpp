@@ -29,6 +29,11 @@ void EntitySystem::deleted(Entity* e)
 		rmEntity(e);
 }
 
+void EntitySystem::process()
+{
+
+}
+
 void EntitySystem::addEntity(Entity*e)
 {
 

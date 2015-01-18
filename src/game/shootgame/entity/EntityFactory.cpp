@@ -1,7 +1,7 @@
 #include "EntityFactory.h"
 #include "../component/TransformComponent.h"
 #include "../component/RenderComponent.h"
-#include "../component/RigidBodyComponent.h"
+#include "../component/PhysicComponent.h"
 #include "../entity/GameWorld.h"
 #include "../component/ComponentPools.h"
 
@@ -61,7 +61,7 @@ Entity* EntityFactory::SpawnEnemyCircle( float x, float y )
 	Entity* entity = acquireEntity();
 	RenderComponent* rc = acquireComponent<RenderComponent>();
 	TransformComponent* tc = acquireComponent<TransformComponent>();
-	RigidBodyComponent* pc = acquireComponent<RigidBodyComponent>();
+	PhysicComponent* pc = acquireComponent<PhysicComponent>();
 
 	rc->loadFromFile("sheet.png");
 	rc->SetRect(sf::IntRect(32,32,32,32));
@@ -69,7 +69,7 @@ Entity* EntityFactory::SpawnEnemyCircle( float x, float y )
 
 	entity->addComponent<RenderComponent>(rc);
 	entity->addComponent<TransformComponent>(tc);
-	entity->addComponent<RigidBodyComponent>(pc);
+	entity->addComponent<PhysicComponent>(pc);
 
 	_eworld->pushEntity(entity);
 
@@ -81,7 +81,7 @@ Entity* EntityFactory::SpawnEnemyDiamond( float x, float y )
 	Entity* entity = acquireEntity();
 	RenderComponent* rc = acquireComponent<RenderComponent>();
 	TransformComponent* tc = acquireComponent<TransformComponent>();
-	RigidBodyComponent* pc = acquireComponent<RigidBodyComponent>();
+	PhysicComponent* pc = acquireComponent<PhysicComponent>();
 
 	rc->loadFromFile("sheet.png");
 	rc->SetRect(sf::IntRect(0,32,32,32));
@@ -89,7 +89,7 @@ Entity* EntityFactory::SpawnEnemyDiamond( float x, float y )
 
 	entity->addComponent<RenderComponent>(rc);
 	entity->addComponent<TransformComponent>(tc);
-	entity->addComponent<RigidBodyComponent>(pc);
+	entity->addComponent<PhysicComponent>(pc);
 
 	_eworld->pushEntity(entity);
 

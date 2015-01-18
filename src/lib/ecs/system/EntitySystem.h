@@ -14,6 +14,8 @@ public:
 	void added(Entity *e);
 	void deleted(Entity *e);
 
+	void process() override;
+
 protected:
 
 	virtual void addEntity(Entity* e);

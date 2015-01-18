@@ -21,12 +21,8 @@ struct component_flags<PlayerComponent>
 { static const ctflags_t flags = 4; };
 
 template <>
-struct component_flags<RigidBodyComponent>
+struct component_flags<PhysicComponent>
 { static const ctflags_t flags = 8; };
-
-template <>
-struct component_flags<ShapeComponent>
-{ static const ctflags_t flags = 16; };
 
 template <class... Ts>
 struct construct_flags;

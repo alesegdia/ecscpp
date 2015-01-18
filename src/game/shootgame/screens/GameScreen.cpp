@@ -15,9 +15,10 @@ GameScreen::~GameScreen()
 void GameScreen::LoadContent()
 {
 
-	// set pools
+	// set services
 	Locator<ImageHolder>::set(&_spriteHolder);
 	Locator<EntityPool>::set(&_entitypool);
+	Locator<Physics>::set(&_physics);
 
 	_rsystem.setWindow(_window);
 	_eworld.setRenderingSystem(&_rsystem);
@@ -25,9 +26,12 @@ void GameScreen::LoadContent()
 
 	_spriteHolder.add("sheet.png");
 	_spriteHolder.add("bbreaker.png");
+	_physics.Prepare();
+	_physicsys.Prepare( &_physics );
 
 	_eworld.pushSystem(&_rsystem);
 	_eworld.pushSystem(&_pcsys);
+	_eworld.pushSystem(&_physicsys);
 
 	_efactory.MakePlayer(300,300);
 	for( int i = 0; i < 10; i++ )

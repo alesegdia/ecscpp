@@ -11,15 +11,13 @@ public:
 		Locator<CRenderPool>::set(&renderpool);
 		Locator<CTransformPool>::set(&transformpool);
 		Locator<CPlayerPool>::set(&playerpool);
-		Locator<CRigidBodyPool>::set(&rigidbodypool);
-		Locator<CShapePool>::set(&shapepool);
+		Locator<CPhysicPool>::set(&physicpool);
     }
 
 private: 
 	CRenderPool renderpool;
 	CTransformPool transformpool;
 	CPlayerPool playerpool;
-	CRigidBodyPool rigidbodypool;
-	CShapePool shapepool;
+	CPhysicPool physicpool;
 
 };

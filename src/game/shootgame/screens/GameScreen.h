@@ -12,11 +12,14 @@
 #include "../entity/GameWorld.h"
 #include "../system/RenderingSystem.h"
 #include "../system/PlayerControllerSystem.h"
-
+#include "../system/PhysicSystem.h"
+#include "../physics/Physics.h"
 
 class GameScreen : public Screen
 {
+
     public:
+
         GameScreen();
         ~GameScreen();
 
@@ -27,9 +30,14 @@ class GameScreen : public Screen
         void Update(sf::Time delta);
         void Draw(sf::RenderWindow &window);
 
+
     private:
+
     	/* Assets */
     	AssetHolder<sf::Image> _spriteHolder;
+
+    	/* Physics */
+    	Physics _physics;
 
 		/* Entities */
 		EntityPool 			_entitypool;
@@ -40,6 +48,7 @@ class GameScreen : public Screen
 		/* Systems */
 		RenderingSystem		_rsystem;
 		PlayerControllerSystem _pcsys;
+		PhysicSystem _physicsys;
 
 
 };
