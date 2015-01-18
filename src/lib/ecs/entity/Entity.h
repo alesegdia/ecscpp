@@ -74,7 +74,7 @@ public:
 
 	bool validateFlags(ctflags_t flags)
 	{
-		return ((_flags & flags) & flags);
+		return ((_flags & flags) == flags);
 	}
 
 	/* Clear all components */

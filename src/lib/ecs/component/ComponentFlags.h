@@ -17,10 +17,10 @@ class AliveComponent {};
 
 template <>
 struct component_flags<ActiveComponent>
-{ static const ctflags_t flags = 0x80000000; };
+{ static const ctflags_t flags = 0x00000000; };
 
 template <>
 struct component_flags<AliveComponent>
-{ static const ctflags_t flags = 0x80000000; };
+{ static const ctflags_t flags = 0x00000000; };
 
 
