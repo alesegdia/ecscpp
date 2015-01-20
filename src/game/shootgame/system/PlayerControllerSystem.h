@@ -39,10 +39,12 @@ public:
 
 		rc->_position.x += dx;
 		rc->_position.y += dy;
-		phc->body->SetLinearVelocity( b2Vec2(dx, dy) );
+		phc->body->SetLinearVelocity( b2Vec2(dx * PLAYER_SPEED, dy * PLAYER_SPEED) );
 	}
 
 private:
+
+	static constexpr float PLAYER_SPEED = 2.f;
 };
 
 #endif

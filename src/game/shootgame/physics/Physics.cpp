@@ -27,11 +27,6 @@ float Physics::ProjUnit( float qtt )
 	return qtt * unitsToMeters;
 }
 
-b2Body* Physics::CreateTileBody( float x, float y, float tilew, float tileh )
-{
-	return CreateRectBody( x, y, tilew, tileh, b2_staticBody );
-}
-
 b2Body* Physics::CreateRectBody( float x, float y, float width, float height, b2BodyType type )
 {
 	// create body
@@ -69,7 +64,3 @@ b2Body* Physics::CreateCircleBody( float x, float y, float radius, b2BodyType ty
 	return body;
 }
 
-b2Body* Physics::CreatePlayerBody( float x, float y )
-{
-	return CreateCircleBody( x, y, 32, b2_dynamicBody );
-}
