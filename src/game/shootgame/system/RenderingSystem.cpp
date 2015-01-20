@@ -16,6 +16,7 @@ void RenderingSystem::Prepare( sf::RenderWindow* window )
 {
 	_window = window;
 	_rtex.create(window->getSize().x,window->getSize().y);
+	_rtex2.create(window->getSize().x,window->getSize().y);
 	if(!shader.loadFromFile("fshad.frag", sf::Shader::Fragment))
 	{
 		printf("ERROR AL CARGAR EL SHADER!");
@@ -23,6 +24,15 @@ void RenderingSystem::Prepare( sf::RenderWindow* window )
 	else
 	{
 		shader.setParameter("texture", sf::Shader::CurrentTexture);
+	}
+
+	if(!shader2.loadFromFile("fshad2.frag", sf::Shader::Fragment))
+	{
+		printf("ERROR AL CARGAR EL SHADER!");
+	}
+	else
+	{
+		shader2.setParameter("texture", sf::Shader::CurrentTexture);
 	}
 }
 
@@ -39,8 +49,10 @@ void RenderingSystem::draw()
 	RenderList(RenderComponent::ZORDER_2);
 	_rtex.display();
 	sf::Sprite sprite(_rtex.getTexture());
-	sprite.setPosition(0,0);
-	_window->draw(sprite, &shader);
+	//sprite.setPosition(0,0);
+	_rtex2.draw( sprite, &shader );
+	sf::Sprite sprite2(_rtex2.getTexture());
+	_window->draw(sprite2, &shader2);
 }
 
 void RenderingSystem::process(Entity* e)

@@ -31,8 +31,10 @@ private:
 
 	sf::RenderWindow* _window;
 	sf::RenderTexture _rtex;
+	sf::RenderTexture _rtex2;
 	std::list<Entity*> _renderLists[RenderComponent::NUM_ZORDERS];
 	sf::Shader shader;
+	sf::Shader shader2;
 };
 
 #endif
