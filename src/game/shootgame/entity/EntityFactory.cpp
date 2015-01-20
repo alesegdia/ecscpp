@@ -48,7 +48,7 @@ Entity* EntityFactory::MakePlayer( float x, float y )
 	rc->zorder = RenderComponent::ZORDER_2;
 	rc->SetRect(sf::IntRect(0,32,32,32));
 	tc->setPosition(x,y);
-	phc->body = _physics->CreateCircleBody( 100, 100, 8, b2_dynamicBody );
+	phc->body = _physics->CreateCircleBody( 0, 600, 8, b2_dynamicBody );
 
 	entity->addComponent<RenderComponent>(rc);
 	entity->addComponent<TransformComponent>(tc);

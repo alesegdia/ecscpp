@@ -15,6 +15,15 @@ RenderingSystem::~RenderingSystem ()
 void RenderingSystem::Prepare( sf::RenderWindow* window )
 {
 	_window = window;
+	_rtex.create(window->getSize().x,window->getSize().y);
+	if(!shader.loadFromFile("fshad.frag", sf::Shader::Fragment))
+	{
+		printf("ERROR AL CARGAR EL SHADER!");
+	}
+	else
+	{
+		shader.setParameter("texture", sf::Shader::CurrentTexture);
+	}
 }
 
 void RenderingSystem::process()
@@ -24,9 +33,14 @@ void RenderingSystem::process()
 
 void RenderingSystem::draw()
 {
+	_rtex.clear();
 	RenderList(RenderComponent::ZORDER_0);
 	RenderList(RenderComponent::ZORDER_1);
 	RenderList(RenderComponent::ZORDER_2);
+	_rtex.display();
+	sf::Sprite sprite(_rtex.getTexture());
+	sprite.setPosition(0,0);
+	_window->draw(sprite, &shader);
 }
 
 void RenderingSystem::process(Entity* e)
@@ -36,7 +50,8 @@ void RenderingSystem::process(Entity* e)
 	PhysicComponent* phc = e->getComponent<PhysicComponent>();
 	//rc->getSprite()->setPosition(tc->_position.x, tc->_position.y);
 	rc->getSprite()->setPosition(phc->body->GetPosition().x * 32.f, phc->body->GetPosition().y * 32.f );
-	_window->draw(*(rc->getSprite()));
+	//_window->draw(*(rc->getSprite()));
+	_rtex.draw(*(rc->getSprite()));
 }
 
 void RenderingSystem::RenderList( RenderComponent::ZOrder order )

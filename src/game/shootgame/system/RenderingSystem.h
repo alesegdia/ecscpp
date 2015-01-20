@@ -30,7 +30,9 @@ private:
 	void rmEntity(Entity* e) override;
 
 	sf::RenderWindow* _window;
+	sf::RenderTexture _rtex;
 	std::list<Entity*> _renderLists[RenderComponent::NUM_ZORDERS];
+	sf::Shader shader;
 };
 
 #endif

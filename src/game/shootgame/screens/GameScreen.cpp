@@ -37,7 +37,7 @@ void GameScreen::LoadContent()
 	for( int i = 0; i < 10; i++ )
 	for( int j = 0; j < 10; j++ )
 	{
-		_efactory.SpawnBlock(200 + i * 32, 200 + j * 32);
+		_efactory.SpawnBlock(100 + i * 32, 400 + j * 32);
 	}
 
 	// systems before making entities!!
