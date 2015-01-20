@@ -6,7 +6,7 @@
 class ShootGame : public Game
 {
     public:
-        ShootGame() : Game(1360, 768, "ShootGame") {}
+        ShootGame() : Game(1024, 768, "ShootGame") {}
         virtual ~ShootGame() {}
 
         void Create();
