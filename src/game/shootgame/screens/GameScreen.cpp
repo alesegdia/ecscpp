@@ -16,7 +16,6 @@ void GameScreen::LoadContent()
 {
 
 	// set services
-	Locator<ImageHolder>::set(&_spriteHolder);
 	Locator<EntityPool>::set(&_entitypool);
 	Locator<Physics>::set(&_physics);
 
@@ -24,8 +23,6 @@ void GameScreen::LoadContent()
 	_eworld.setRenderingSystem(&_rsystem);
 	_efactory.Prepare(&_eworld, &_physics);
 
-	_spriteHolder.add("sheet.png");
-	_spriteHolder.add("bbreaker.png");
 	_physics.Prepare();
 	_physicsys.Prepare( &_physics );
 

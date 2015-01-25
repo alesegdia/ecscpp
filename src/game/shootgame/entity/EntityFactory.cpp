@@ -5,6 +5,7 @@
 #include "../entity/GameWorld.h"
 #include "../component/ComponentPools.h"
 #include "../physics/Physics.h"
+#include "../Assets.h"
 
 EntityFactory::EntityFactory()
 {
@@ -44,7 +45,8 @@ Entity* EntityFactory::MakePlayer( float x, float y )
 	PlayerComponent* pc = acquireComponent<PlayerComponent>();
 	PhysicComponent* phc = acquireComponent<PhysicComponent>();
 
-	rc->loadFromFile("bbreaker.png");
+	Assets* assets = Locator<Assets>::get();
+	rc->LoadFromTexture(&(assets->bbreaker));
 	rc->zorder = RenderComponent::ZORDER_2;
 	rc->SetRect(sf::IntRect(0,32,32,32));
 	tc->setPosition(x,y);
@@ -67,7 +69,8 @@ Entity* EntityFactory::SpawnBlock( float x, float y )
 	TransformComponent* tc = acquireComponent<TransformComponent>();
 	PhysicComponent* phc = acquireComponent<PhysicComponent>();
 
-	rc->loadFromFile("bbreaker.png");
+	Assets* assets = Locator<Assets>::get();
+	rc->LoadFromTexture(&(assets->bbreaker));
 	rc->SetRect(sf::IntRect(32,0,32,32));
 	tc->setPosition(x,y);
 	phc->body = _physics->CreateRectBody( x, y, 16, 16, b2_staticBody );

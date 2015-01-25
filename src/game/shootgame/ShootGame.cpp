@@ -8,5 +8,6 @@ void ShootGame::Create()
     boost::shared_ptr<Screen> ptr(new SplashScreen());
     //boost::shared_ptr<Screen> ptr(new GameScreen());
 
+	Locator<Assets>::set(&(this->assets));
     ScreenManager::GetInstance().Initialize(ptr);
 }

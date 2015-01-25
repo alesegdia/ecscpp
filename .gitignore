@@ -3,6 +3,7 @@
 *.swo
 *.swp
 *.swn
+*.swm
 00
 build
 callgrind*

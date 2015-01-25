@@ -1,8 +1,6 @@
 #ifndef __LOCATOR_H__
 #define __LOCATOR_H__
 
-#include <core/assets/AssetHolder.h>
-
 template<typename Service>
 class Locator
 {

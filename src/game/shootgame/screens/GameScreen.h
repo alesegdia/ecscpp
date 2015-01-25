@@ -3,7 +3,6 @@
 
 #include <SFML/Graphics.hpp>
 #include <core/game/screen/Screen.h>
-#include <core/assets/AssetHolder.h>
 #include <ecs/system/EntityProcessingSystem.h>
 #include "../entity/EntityFactory.h"
 #include "../component/ComponentPools.h"
@@ -32,9 +31,6 @@ class GameScreen : public Screen
 
 
     private:
-
-    	/* Assets */
-    	AssetHolder<sf::Image> _spriteHolder;
 
     	/* Physics */
     	Physics _physics;

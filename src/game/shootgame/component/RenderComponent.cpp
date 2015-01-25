@@ -1,13 +1,10 @@
 #include "RenderComponent.h"
 #include "ComponentPools.h"
 
-void RenderComponent::loadFromFile(const char* file)
+void RenderComponent::LoadFromTexture(sf::Texture* tex)
 {
-	sf::Image* image;
-	image = Locator<ImageHolder>::get()->get(file);
-
-	_tex.loadFromImage(*image);
-	_sprite.setTexture(_tex);
+	_tex = tex;
+	_sprite.setTexture(*_tex);
 	_sprite.setPosition(-40,-40);
 }
 

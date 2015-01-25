@@ -1,3 +1,4 @@
+#!/usr/bin/python
 
 import json
 import argparse
@@ -93,21 +94,23 @@ class AssetParser(object):
 
         for asset_list in asset_types.keys():
             for asset_id, asset in self.asset_data[asset_list].items():
-                definitions += Template.generic_definition % \
-                        { "type": asset_types[asset_list], "var_name": asset_id }
+                definitions += "\t" + asset_types[asset_list] + " " + asset_id + ";\n"
         return definitions
 
     def build_assets_init(self):
         inits = ""
 
+        inits += "\t\t// TEXTURES\n"
         for tex_id, tex in self.asset_data["textures"].items():
             # TODO: check if loadFromFile returns true!
             inits += "\t\tthis->" + tex_id + ".loadFromFile(\"" + tex["path"] + "\");\n"
 
+        inits += "\n\t\t// SPRITESHEETS\n"
         for sheet_id, sheet in self.asset_data["spritesheets"].items():
             inits += "\t\tthis->" + sheet_id + ".SetTexture(&(this->" + sheet["texture"]["id"] + "));\n"
             inits += "\t\tthis->" + sheet_id + ".SetSize(" + str(sheet["size"][0]) + ", " + str(sheet["size"][1]) + ");\n"
 
+        inits += "\n\t\t// ANIMATIONS\n"
         for anim_id, anim in self.asset_data["animations"].items():
             inits += "\t\tthis->" + anim_id + ".SetSpritesheet(" + anim["spritesheet"]["id"] + ");\n"
             inits += "\t\tthis->" + anim_id + ".SetNumFrames(" + str(len(anim["frame_sequence"])) + ");\n"
@@ -119,6 +122,7 @@ class AssetParser(object):
 
         return inits
 
+
     def build_file(self):
         return Template.cpp_file_tpl % \
             {
@@ -126,22 +130,26 @@ class AssetParser(object):
                 "definitions": self.build_assets_def()
             }
 
+    def gen_h_file(self, path):
+        with open(path, "w") as f:
+            f.write(self.build_file())
+
 class Template(object):
-    generic_definition = "\t%(type)s %(var_name)s;\n"
     cpp_file_tpl = \
 '''
 
 #pragma once
+
+#include <SFML/Graphics.hpp>
 
 class Assets {
 
 public:
 
 \tAssets() {
+
 %(inits)s
 \t}
-
-private:
 
 %(definitions)s
 };
@@ -152,12 +160,16 @@ private:
 def main():
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("jsonpath", help="Path to json file to load")
+    parser.add_argument("--jsonpath", required=True, help="Path to json file to load")
+    parser.add_argument("--outcpp", required=False, help="Generated .h file name")
     args = parser.parse_args()
 
     parser = AssetParser()
     parser.parse(args.jsonpath)
     print(parser.build_file())
+
+    if args.outcpp:
+        parser.gen_h_file(args.outcpp)
 
 
 if __name__ == '__main__':

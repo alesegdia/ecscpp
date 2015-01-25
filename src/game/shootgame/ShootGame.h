@@ -2,6 +2,7 @@
 #define MYGAME_H
 
 #include <core/game/Game.h>
+#include "Assets.h"
 
 class ShootGame : public Game
 {
@@ -12,6 +13,8 @@ class ShootGame : public Game
         void Create();
 
     private:
+
+    	Assets assets;
 };
 
 #endif // MYGAME_H

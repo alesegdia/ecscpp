@@ -1,0 +1,15 @@
+
+{
+	"textures": {
+		"mainchar": { "path": "bbreaker.png" }
+	},
+
+	"spritesheets": {
+	},
+
+	"animations": {
+	}
+
+}
+
+

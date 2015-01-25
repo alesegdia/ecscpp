@@ -17,7 +17,7 @@ struct RenderComponent : public Component
 	static constexpr int NUM_ZORDERS = 3;
 
 	/* Helpers and accesors */
-	void loadFromFile(const char* file);
+	void LoadFromTexture(sf::Texture* tex);
 	sf::Sprite* getSprite();
 	void SetRect( sf::IntRect rect )
 	{
@@ -29,7 +29,7 @@ struct RenderComponent : public Component
 
 	/* Fields */
 	sf::Sprite _sprite;
-	sf::Texture _tex;
+	sf::Texture* _tex;
 	ZOrder zorder = ZORDER_1;
 };
 
