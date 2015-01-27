@@ -1,7 +1,10 @@
 
 #pragma once
 
-#include<string>
+#include <string>
+#include <vector>
+
+#include <SFML/Graphics.hpp>
 
 #include "Spritesheet.h"
 
@@ -23,7 +26,7 @@ public:
 	Animation ();
 	virtual ~Animation ();
 
-	bool Prepare( int num_frames, int num_plays );
+	bool Prepare( Spritesheet* sheet, int num_frames, int num_plays );
 	void SetFrame( int frame_seq, int frame_sheet, sf::Time duration );
 
 	void Reset( Animation::Data& data );
@@ -32,5 +35,7 @@ public:
 private:
 	std::vector<Animation::Frame> _frames;
 	int _numPlays;
+	Spritesheet* _sheet;
+
 };
 

@@ -11,13 +11,14 @@ Animation::~Animation ()
 	 // dtor
 }
 
-bool Animation::Prepare( int num_frames, int num_plays )
+bool Animation::Prepare( Spritesheet* sheet, int num_frames, int num_plays )
 {
 	bool retcode = false;
 	if( _frames.size() == 0 )
 	{
 		_frames.resize( num_frames );
 		_numPlays = num_plays;
+		_sheet = sheet;
 	}
 	return retcode;
 }
