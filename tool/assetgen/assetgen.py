@@ -45,12 +45,13 @@ class AssetParser(object):
         for sheet_id, sheet_data in self.asset_data["spritesheets"].items():
             self.check_spritesheet(sheet_id, sheet_data)
 
-    def check_dict_args(self, pre_text, dictionary, expected_keys):
+    def check_dict_args(self, pre_text, dictionary, expected_keys, optional=[]):
         if set(expected_keys) != set(dictionary.keys()):
-            exception_string = pre_text + "\n" + \
-                    "\tExpected: " + str(expected_keys) + "\n" \
-                    "\tGot: " + str(dictionary.keys()) + "\n"
-            raise Exception(exception_string)
+            if set(dictionary.keys()).intersection(set(optional)) != set(optional):
+                exception_string = pre_text + "\n" + \
+                        "\tExpected: " + str(expected_keys) + "\n" \
+                        "\tGot: " + str(dictionary.keys()) + "\n"
+                raise Exception(exception_string)
 
     def check_texture(self, tex_id, tex_data):
         self.check_dict_args("At texture " + tex_id, tex_data, ["path"])
@@ -59,7 +60,7 @@ class AssetParser(object):
         where = "At animation " + anim_id
 
         # check correct animation dict
-        self.check_dict_args(where, anim_data, ["spritesheet", "frame_sequence", "frame_duration"])
+        self.check_dict_args(where, anim_data, ["spritesheet", "frame_sequence", "frame_duration"], optional=["numplays"])
 
         # check frame length
         if len(anim_data["frame_sequence"]) != len(anim_data["frame_duration"]):
@@ -107,13 +108,14 @@ class AssetParser(object):
 
         inits += "\n\t\t// SPRITESHEETS\n"
         for sheet_id, sheet in self.asset_data["spritesheets"].items():
-            inits += "\t\tthis->" + sheet_id + ".SetTexture(&(this->" + sheet["texture"]["id"] + "));\n"
-            inits += "\t\tthis->" + sheet_id + ".SetSize(" + str(sheet["size"][0]) + ", " + str(sheet["size"][1]) + ");\n"
+            inits += "\t\tthis->" + sheet_id + ".Prepare(&(this->" + sheet["texture"]["id"] + "), sf::Vector2i( " + str(sheet["size"][0]) + ", " + str(sheet["size"][1]) + " ));\n"
 
         inits += "\n\t\t// ANIMATIONS\n"
         for anim_id, anim in self.asset_data["animations"].items():
-            inits += "\t\tthis->" + anim_id + ".SetSpritesheet(" + anim["spritesheet"]["id"] + ");\n"
-            inits += "\t\tthis->" + anim_id + ".SetNumFrames(" + str(len(anim["frame_sequence"])) + ");\n"
+            numplays = -1
+            if "numplays" in anim:
+                numplays = str(anim["numplays"])
+            inits += "\t\tthis->" + anim_id + ".Prepare( " + anim["spritesheet"]["id"] + ", " + str(len(anim["frame_sequence"])) + ", " + str(numplays) + " );\n"
             fseq = anim["frame_sequence"]
             fdur = anim["frame_duration"]
             for idx in range(0, len(anim["frame_sequence"])):
