@@ -46,9 +46,9 @@ Entity* EntityFactory::MakePlayer( float x, float y )
 	PhysicComponent* phc = acquireComponent<PhysicComponent>();
 
 	Assets* assets = Locator<Assets>::get();
-	rc->LoadFromTexture(&(assets->bbreaker));
+	rc->LoadFromTexture(&(assets->playertex));
 	rc->zorder = RenderComponent::ZORDER_2;
-	rc->SetRect(sf::IntRect(0,32,32,32));
+	rc->SetRect(sf::IntRect(0,0,32,34));
 	tc->setPosition(x,y);
 	phc->body = _physics->CreateCircleBody( 0, 600, 8, b2_dynamicBody );
 
@@ -70,8 +70,8 @@ Entity* EntityFactory::SpawnBlock( float x, float y )
 	PhysicComponent* phc = acquireComponent<PhysicComponent>();
 
 	Assets* assets = Locator<Assets>::get();
-	rc->LoadFromTexture(&(assets->bbreaker));
-	rc->SetRect(sf::IntRect(32,0,32,32));
+	rc->LoadFromTexture(&(assets->playertex));
+	rc->SetRect(sf::IntRect(64,34,32,34));
 	tc->setPosition(x,y);
 	phc->body = _physics->CreateRectBody( x, y, 16, 16, b2_staticBody );
 
