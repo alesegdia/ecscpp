@@ -11,3 +11,4 @@ callgrind*
 /lib
 bin/
 scripts.doc
+/media/00
