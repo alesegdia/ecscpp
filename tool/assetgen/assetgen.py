@@ -115,12 +115,12 @@ class AssetParser(object):
             numplays = -1
             if "numplays" in anim:
                 numplays = str(anim["numplays"])
-            inits += "\t\tthis->" + anim_id + ".Prepare( " + anim["spritesheet"]["id"] + ", " + str(len(anim["frame_sequence"])) + ", " + str(numplays) + " );\n"
+            inits += "\t\tthis->" + anim_id + ".Prepare( &" + anim["spritesheet"]["id"] + ", " + str(len(anim["frame_sequence"])) + ", " + str(numplays) + " );\n"
             fseq = anim["frame_sequence"]
             fdur = anim["frame_duration"]
             for idx in range(0, len(anim["frame_sequence"])):
                 frame_num = fseq[idx][0] + fseq[idx][1] * anim["spritesheet"]["size"][0]
-                inits += "\t\tthis->" + anim_id + ".SetFrame(" + str(idx) + ", " + str(frame_num) + ", " + str(fdur[idx]) + "f);\n"
+                inits += "\t\tthis->" + anim_id + ".SetFrame(" + str(idx) + ", " + str(frame_num) + ", sf::seconds(" + str(fdur[idx]) + "f) );\n"
 
         return inits
 
@@ -143,6 +143,8 @@ class Template(object):
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <core/assets/Animation.h>
+#include <core/assets/Spritesheet.h>
 
 class Assets {
 

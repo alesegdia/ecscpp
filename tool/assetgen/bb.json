@@ -1,13 +1,32 @@
 
 {
 	"textures": {
-		"mainchar": { "path": "bbreaker.png" }
+		"playertex": { "path": "playersheet.png" }
 	},
 
 	"spritesheets": {
+		"playersheet": {
+			"texture": "playertex",
+			"size": [ 3, 3 ]
+		}
 	},
 
 	"animations": {
+		"player_walk": {
+			"spritesheet": "playersheet",
+			"frame_sequence": [ [0,0], [1,0], [1,1], [1,0], [0,0], [2,0], [2,1], [2,0] ],
+			"frame_duration": [ 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2 ]
+		},
+		"player_stand": {
+			"spritesheet": "playersheet",
+			"frame_sequence": [ [0,0] ],
+			"frame_duration": [ 1.0 ]
+		},
+		"player_duriro": {
+			"spritesheet": "playersheet",
+			"frame_sequence": [ [0,1], [0,2] ],
+			"frame_duration": [ 0.1, 0.1 ]
+		}
 	}
 
 }
