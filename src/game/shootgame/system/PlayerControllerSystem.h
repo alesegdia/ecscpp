@@ -45,7 +45,7 @@ public:
 
 private:
 
-	static constexpr float PLAYER_SPEED = 2.f;
+	static constexpr float PLAYER_SPEED = 4.f;
 };
 
 #endif
