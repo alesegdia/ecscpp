@@ -3,8 +3,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 # SET SOURCES AND STUFF
 file(GLOB_RECURSE CORE_SRC lib/core/*)
 file(GLOB_RECURSE ECS_SRC lib/ecs/*)
-file(GLOB_RECURSE TESTGAME_SRC game/testgame/*)
-file(GLOB_RECURSE SHOOTGAME_SRC game/shootgame/*)
+file(GLOB_RECURSE TESTGAME_SRC demo/testgame/*)
+file(GLOB_RECURSE SHOOTGAME_SRC demo/shootgame/*)
 
 #set(SFML_STATIC_LIBRARIES TRUE)
 
