@@ -18,15 +18,19 @@ find_package(BOX2D REQUIRED)
 add_library(fwcore ${CORE_SRC})
 add_library(fwecs ${ECS_SRC})
 
+include_directories(fwcore lib)
+include_directories(fwecs lib)
+
 # add_executable(testgame ${TESTGAME_SRC})
 # target_link_libraries(testgame LINK_PUBLIC fwcore fwecs)
 
-add_executable(shootgame ${SHOOTGAME_SRC})
-target_link_libraries(shootgame LINK_PUBLIC fwcore fwecs)
+# add_executable(shootgame ${SHOOTGAME_SRC})
+# target_link_libraries(shootgame LINK_PUBLIC fwcore fwecs)
 
 # include_directories(testgame lib)
-include_directories(shootgame lib)
+# include_directories(shootgame lib)
 
+#[[
 if(OPENGL_FOUND AND SFML_FOUND AND Boost_FOUND AND BOX2D_FOUND)
 
 	include_directories(${OPENGL_INCLUDE_DIR})
@@ -44,6 +48,7 @@ if(OPENGL_FOUND AND SFML_FOUND AND Boost_FOUND AND BOX2D_FOUND)
 	target_link_libraries(shootgame ${BOX2D_LIBRARIES})
 
 endif()
+]]
 
 # Thor
 if(THOR_FOUND)
