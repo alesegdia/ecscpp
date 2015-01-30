@@ -2,6 +2,7 @@
 #define __PLAYERCONTROLLERSYSTEM_H__
 
 #include "../component/Components.h"
+#include <SFML/Window.hpp>
 
 class PlayerControllerSystem : public EntityProcessingSystem
 {
@@ -22,10 +23,10 @@ public:
 		dx = dy = 0;
 
 		bool left, right, up, down;
-		left = sf::Keyboard::isKeyPressed(sf::Keyboard::Left);
-		right = sf::Keyboard::isKeyPressed(sf::Keyboard::Right);
-		up = sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
-		down = sf::Keyboard::isKeyPressed(sf::Keyboard::Down);
+		left = sf::Keyboard::isKeyPressed(sf::Keyboard::A);
+		right = sf::Keyboard::isKeyPressed(sf::Keyboard::D);
+		up = sf::Keyboard::isKeyPressed(sf::Keyboard::W);
+		down = sf::Keyboard::isKeyPressed(sf::Keyboard::S);
 
 		if( (left&&!right) || (!left&&right) )
 		{
