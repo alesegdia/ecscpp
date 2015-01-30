@@ -43,16 +43,22 @@ void RenderingSystem::process()
 
 void RenderingSystem::draw()
 {
+	// render scene to texture
 	_rtex.clear();
 	RenderList(RenderComponent::ZORDER_0);
 	RenderList(RenderComponent::ZORDER_1);
 	RenderList(RenderComponent::ZORDER_2);
 	_rtex.display();
+
+	// apply gaussian blur
 	sf::Sprite sprite(_rtex.getTexture());
 	//sprite.setPosition(0,0);
-	_rtex2.draw( sprite, &shader );
-	sf::Sprite sprite2(_rtex2.getTexture());
-	_window->draw(sprite2, &shader2);
+	//_rtex2.draw( sprite, &shader );
+	_window->draw(sprite, &shader);
+
+
+	//sf::Sprite sprite2(_rtex2.getTexture());
+	//_window->draw(sprite2, &shader2);
 }
 
 void RenderingSystem::process(Entity* e)
