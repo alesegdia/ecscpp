@@ -9,12 +9,21 @@ Physics::Physics ()
 Physics::~Physics ()
 {
 	 // dtor
+	 delete ddraw;
 }
 
 void Physics::Prepare(float unitsToMeters)
 {
 	world = new b2World(b2Vec2(0,0));
 	this->unitsToMeters = unitsToMeters;
+}
+
+
+void Physics::ActiveDebugDraw( sf::RenderWindow* win )
+{
+	ddraw = new DebugDraw(*win, 1.f/this->unitsToMeters);
+	this->world->SetDebugDraw(ddraw);
+	ddraw->SetFlags( b2Draw::e_shapeBit );
 }
 
 b2World* Physics::GetWorld()

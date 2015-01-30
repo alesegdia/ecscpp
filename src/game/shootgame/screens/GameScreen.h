@@ -13,6 +13,7 @@
 #include "../system/PlayerControllerSystem.h"
 #include "../system/PhysicSystem.h"
 #include "../physics/Physics.h"
+#include "../physics/debugrender.h"
 
 class GameScreen : public Screen
 {
@@ -45,6 +46,7 @@ class GameScreen : public Screen
 		RenderingSystem		_rsystem;
 		PlayerControllerSystem _pcsys;
 		PhysicSystem _physicsys;
+		DebugDraw* _debugDraw;
 
 
 };

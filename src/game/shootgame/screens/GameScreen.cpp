@@ -24,6 +24,7 @@ void GameScreen::LoadContent()
 	_efactory.Prepare(&_eworld, &_physics);
 
 	_physics.Prepare();
+	_physics.ActiveDebugDraw(_window);
 	_physicsys.Prepare( &_physics );
 
 	_eworld.pushSystem(&_rsystem);
@@ -65,5 +66,6 @@ void GameScreen::Update(sf::Time delta)
 void GameScreen::Draw(sf::RenderWindow &window)
 {
 	_rsystem.draw();
+	_physics.GetWorld()->DrawDebugData();
 }
 
