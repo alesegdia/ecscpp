@@ -50,12 +50,17 @@ Entity* EntityFactory::MakePlayer( float x, float y )
 	rc->zorder = RenderComponent::ZORDER_2;
 	rc->SetRect(sf::IntRect(0,0,32,34));
 	tc->setPosition(x,y);
-	phc->body = _physics->CreateCircleBody( 0, 600, 8, b2_dynamicBody );
+	phc->body = _physics->CreateCircleBody( -100, -100, 8, b2_dynamicBody );
 
 	entity->addComponent<RenderComponent>(rc);
 	entity->addComponent<TransformComponent>(tc);
 	entity->addComponent<PlayerComponent>(pc);
 	entity->addComponent<PhysicComponent>(phc);
+
+	rc->getSprite()->setOrigin(
+			rc->getSprite()->getLocalBounds().width/2.f,
+			rc->getSprite()->getLocalBounds().height/2.f
+		);
 
 	_eworld->pushEntity(entity);
 
@@ -78,6 +83,11 @@ Entity* EntityFactory::SpawnBlock( float x, float y )
 	entity->addComponent<RenderComponent>(rc);
 	entity->addComponent<TransformComponent>(tc);
 	entity->addComponent<PhysicComponent>(phc);
+
+	rc->getSprite()->setOrigin(
+			rc->getSprite()->getLocalBounds().width/2.f,
+			rc->getSprite()->getLocalBounds().height/2.f
+		);
 
 	_eworld->pushEntity(entity);
 
