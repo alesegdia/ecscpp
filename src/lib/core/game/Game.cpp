@@ -20,6 +20,11 @@ void Game::Run()
     {
         //sf::Event event;
 
+		sf::Event event;
+		while( mWindow.pollEvent( event ) )
+		{
+			ScreenManager::GetInstance().GetCurrentScreen()->HandleEvent( event );
+		}
         ScreenManager::GetInstance().HandleInput(mWindow);
         ScreenManager::GetInstance().Update(frameClock.restart());
 

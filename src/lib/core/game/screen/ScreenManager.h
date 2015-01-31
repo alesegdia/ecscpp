@@ -26,6 +26,7 @@ class ScreenManager : public Singleton < ScreenManager >
         void Update(sf::Time delta);
         void Draw(sf::RenderWindow &window);
 
+		ScreenPtr GetCurrentScreen();
         void LoadScreen(ScreenPtr screen);
 
     private:

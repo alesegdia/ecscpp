@@ -15,6 +15,7 @@ class Screen
         virtual void UnloadContent();
         void SetWindow(sf::RenderWindow* window);
 
+		virtual void HandleEvent(sf::Event& event);
         virtual void HandleInput(sf::RenderWindow &window);
         virtual void Update(sf::Time delta);
         virtual void Draw(sf::RenderWindow &window);

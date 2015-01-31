@@ -21,6 +21,11 @@ void Screen::SetWindow(sf::RenderWindow* window)
 	_window = window;
 }
 
+void Screen::HandleEvent(sf::Event& event)
+{
+
+}
+
 void Screen::HandleInput(sf::RenderWindow &window)
 {
 

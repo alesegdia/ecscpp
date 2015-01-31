@@ -51,3 +51,8 @@ void ScreenManager::HandleInput(sf::RenderWindow &window)
 {
     currentScreen->HandleInput(window);
 }
+
+ScreenPtr ScreenManager::GetCurrentScreen()
+{
+	return currentScreen;
+}
