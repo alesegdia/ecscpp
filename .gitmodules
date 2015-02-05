@@ -1,3 +1,9 @@
 [submodule "thirdparty/tmxparser"]
 	path = thirdparty/tmxparser
 	url = git@github.com:alesegdia/tmxparser.git
+[submodule "module/ecscpp"]
+	path = module/ecscpp
+	url = git@github.com:alesegdia/ecscpp.git
+[submodule "module/rztl"]
+	path = module/rztl
+	url = git@github.com:alesegdia/rztl.git
