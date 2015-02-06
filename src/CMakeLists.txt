@@ -18,6 +18,10 @@ add_library(fwecs ${ECS_SRC})
 include_directories(fwcore lib)
 include_directories(fwecs lib)
 
+set(RZTL_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../module/rztl/include)
+include_directories(fwcore ${RZTL_PATH})
+include_directories(fwecs ${RZTL_PATH})
+
 # add_executable(testgame ${TESTGAME_SRC})
 # target_link_libraries(testgame LINK_PUBLIC fwcore fwecs)
 # include_directories(testgame lib)
