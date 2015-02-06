@@ -10,6 +10,9 @@
 
 #define COMPONENTMAP_SZ 10
 
+#include <rztl/pool.h>
+template <typename T> using Pool = rztl::Pool<T>;
+
 class Entity : public Poolable
 {
 public:
@@ -99,14 +102,14 @@ public:
 		_components[std::type_index(typeid(ComponentType))]->cleanUp();
 
 		// clear it from the map? check algorithmic complexity and think if it's worth
-		Locator<Pool<ComponentType>>::get()->release(
-			_components[std::type_index(typeid(ComponentType))]->getHandler());
+		Locator<Pool<ComponentType>>::get()->Destroy(
+			_components[std::type_index(typeid(ComponentType))]);
 	}
 
 	void cleanUp()
 	{
 		clearComponents();
-		Locator<Pool<Entity>>::get()->release(_poolHandler);
+		//Locator<Pool<Entity>>::get()->Destroy(this);
 	}
 
 	void SetActive( bool active )

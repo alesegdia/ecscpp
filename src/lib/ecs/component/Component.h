@@ -2,17 +2,13 @@
 #define __COMPONENT_H__
 
 #include <stdinc.h>
-#include <core/memory/Poolable.h>
 
-class Component : Poolable
+class Component
 {
 public:
-	Component();
-	virtual ~Component()=0;
+	virtual ~Component();
 
 	/* Poolable interface */
-	virtual size_t getHandler();
-	virtual void setHandler(size_t handler);
 	virtual void cleanUp();
 };
 
