@@ -1,16 +1,12 @@
 #ifndef SCREENMANAGER_H
 #define SCREENMANAGER_H
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <SFML/Graphics.hpp>
 #include <core/game/screen/Screen.h>
-#include <core/CoreCommon.h>
 #include <core/util/Singleton.h>
 
-
-#define ScreenWidth 800
-#define ScreenHeight 600
-
+typedef std::shared_ptr<Screen> ScreenPtr;
 class ScreenManager : public Singleton < ScreenManager >
 {
     public:

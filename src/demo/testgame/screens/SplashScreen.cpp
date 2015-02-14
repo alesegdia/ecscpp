@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <iostream>
 
 #include "SplashScreen.h"
@@ -32,7 +32,7 @@ void SplashScreen::UnloadContent()
 
 }
 
-#define SHARED_FROM_SCREEN(scr) boost::shared_ptr<scr>(new scr())
+#define SHARED_FROM_SCREEN(scr) std::shared_ptr<scr>(new scr())
 #define SCREEN2KEY(key, scr) if(sf::Keyboard::isKeyPressed(sf::Keyboard::key)) \
                                 ScreenManager::GetInstance().LoadScreen(SHARED_FROM_SCREEN(scr))
 #define FUNC2KEY(key,func) if(sf::Keyboard::isKeyPressed(sf::Keyboard::key)) \
@@ -43,7 +43,7 @@ void SplashScreen::HandleInput(sf::RenderWindow &window)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Insert))
         ScreenManager::GetInstance().LoadScreen(
-            boost::shared_ptr<Screen>(new GameScreen()));
+            std::shared_ptr<Screen>(new GameScreen()));
 
     //SCREEN2KEY(T, TitleScreen);
 

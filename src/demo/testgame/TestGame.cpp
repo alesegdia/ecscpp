@@ -4,7 +4,7 @@
 
 void TestGame::Create()
 {
-    boost::shared_ptr<Screen> ptr(new SplashScreen());
+    std::shared_ptr<Screen> ptr(new SplashScreen());
 
     ScreenManager::GetInstance().Initialize(ptr);
 }

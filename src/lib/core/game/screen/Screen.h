@@ -2,7 +2,6 @@
 #define SCREEN_H
 
 #include <SFML/Graphics.hpp>
-#include <boost/shared_ptr.hpp>
 
 
 class Screen

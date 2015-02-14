@@ -1,6 +1,4 @@
 #include <iostream>
-#include "boost/shared_ptr.hpp"
-
 #include "ScreenManager.h"
 #include "Screen.h"
 
