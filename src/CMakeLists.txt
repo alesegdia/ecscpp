@@ -10,7 +10,6 @@ file(GLOB_RECURSE TESTGAME_SRC demo/testgame/*)
 # FIND LIBRARIES
 find_package(SFML 2 COMPONENTS system window graphics network audio)
 find_package(OpenGL REQUIRED)
-find_package(Boost REQUIRED)
 
 add_library(fwcore ${CORE_SRC})
 add_library(fwecs ${ECS_SRC})
@@ -26,15 +25,13 @@ include_directories(fwecs ${RZTL_PATH})
 # target_link_libraries(testgame LINK_PUBLIC fwcore fwecs)
 # include_directories(testgame lib)
 
-if(OPENGL_FOUND AND SFML_FOUND AND Boost_FOUND AND BOX2D_FOUND)
+if(OPENGL_FOUND AND SFML_FOUND AND BOX2D_FOUND)
 
 	include_directories(${OPENGL_INCLUDE_DIR})
 	include_directories(${SFML_INCLUDE_DIR})
-	include_directories(${Boost_INCLUDE_DIRS})
 
 	# target_link_libraries(testgame ${OPENGL_LIBRARIES})
 	# target_link_libraries(testgame ${SFML_LIBRARIES})
-	# target_link_libraries(testgame ${Boost_LIBRARIES})
 
 endif()
 
