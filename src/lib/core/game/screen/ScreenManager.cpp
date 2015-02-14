@@ -2,22 +2,56 @@
 #include "ScreenManager.h"
 #include "Screen.h"
 
-ScreenPtr currentScreen;
 
 ScreenManager::~ScreenManager()
 {}
 
-void ScreenManager::Initialize(ScreenPtr screen)
+void ScreenManager::Initialize(const std::string& name)
 {
-    currentScreen = screen;
+	ScreenPtr screen = GetScreen(name);
+	screen->LoadContent();
+	currentScreen = screen;
 }
 
-void ScreenManager::LoadScreen(ScreenPtr screen)
+void ScreenManager::LoadScreen(const std::string& name)
 {
+	ScreenPtr nextScreen( GetScreen( name ) );
     currentScreen->UnloadContent();
-    currentScreen.swap(screen);
+    currentScreen.swap(nextScreen);
     currentScreen->SetWindow(_window);
     currentScreen->LoadContent();
+}
+
+bool ScreenManager::IsValidScreenName( const std::string& name )
+{
+	return screenMap.find( name ) == screenMap.end();
+}
+
+void ScreenManager::AddScreen(const std::string& name, ScreenPtr screen)
+{
+	if( IsValidScreenName(name) )
+	{
+		screen->SetScreenManager( this );
+		screenMap.insert( std::make_pair( name, screen ) );
+	}
+	else
+	{
+		std::cout << "EXISTING SCREEN WITH NAME " << name << std::endl;
+	}
+}
+
+ScreenPtr ScreenManager::GetScreen( const std::string& name )
+{
+	ScreenPtr ret(nullptr);
+	if( screenMap.find( name ) != screenMap.end() )
+	{
+		ret = ScreenPtr( screenMap[name] );
+	}
+	else
+	{
+		std::cout << "NO SCREEN WITH NAME " << name << std::endl;
+	}
+	return ret;
 }
 
 void ScreenManager::SetWindow(sf::RenderWindow* window)
@@ -48,6 +82,11 @@ void ScreenManager::Draw(sf::RenderWindow &window)
 void ScreenManager::HandleInput(sf::RenderWindow &window)
 {
     currentScreen->HandleInput(window);
+}
+
+void ScreenManager::HandleEvent(sf::Event &event)
+{
+    currentScreen->HandleEvent(event);
 }
 
 ScreenPtr ScreenManager::GetCurrentScreen()

@@ -2,7 +2,9 @@
 #define SCREEN_H
 
 #include <SFML/Graphics.hpp>
+#include <memory>
 
+class ScreenManager;
 
 class Screen
 {
@@ -10,6 +12,7 @@ class Screen
         Screen();
         virtual ~Screen() {}
 
+		void SetScreenManager( ScreenManager* screenmgr );
         virtual void LoadContent()=0;
         virtual void UnloadContent();
         void SetWindow(sf::RenderWindow* window);
@@ -21,7 +24,7 @@ class Screen
 
     protected:
 		sf::RenderWindow* _window;
-    private:
+		ScreenManager* screenmgr;
 };
 
 #endif // GAMESCREEN_H

@@ -1,11 +1,16 @@
 #include <SFML/Graphics.hpp>
 #include <core/game/screen/Screen.h>
+#include <core/game/screen/ScreenManager.h>
 
 Screen::Screen()
 {
     //ctor
 }
 
+void Screen::SetScreenManager( ScreenManager* screenmgr )
+{
+	this->screenmgr = screenmgr;
+}
 void Screen::LoadContent()
 {
 

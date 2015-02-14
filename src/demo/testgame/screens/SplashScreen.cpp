@@ -32,22 +32,14 @@ void SplashScreen::UnloadContent()
 
 }
 
-#define SHARED_FROM_SCREEN(scr) std::shared_ptr<scr>(new scr())
-#define SCREEN2KEY(key, scr) if(sf::Keyboard::isKeyPressed(sf::Keyboard::key)) \
-                                ScreenManager::GetInstance().LoadScreen(SHARED_FROM_SCREEN(scr))
-#define FUNC2KEY(key,func) if(sf::Keyboard::isKeyPressed(sf::Keyboard::key)) \
-                                func
 #define isDown(key) sf::Keyboard::isKeyPressed(sf::Keyboard::key)
 
 void SplashScreen::HandleInput(sf::RenderWindow &window)
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Insert))
-        ScreenManager::GetInstance().LoadScreen(
-            std::shared_ptr<Screen>(new GameScreen()));
-
-    //SCREEN2KEY(T, TitleScreen);
-
-    SCREEN2KEY(T, GameScreen);
+	if( isDown(Space) )
+	{
+		screenmgr->LoadScreen( "GameScreen" );
+	}
 
     if (isDown(Escape))
         window.close();

@@ -1,5 +1,6 @@
 #include "Game.h"
 #include <core/game/screen/ScreenManager.h>
+#include <sstream>
 
 void Game::Create()
 {
@@ -8,30 +9,31 @@ void Game::Create()
 
 void Game::Run()
 {
-    Create();
-	ScreenManager::GetInstance().SetWindow(&mWindow);
-    ScreenManager::GetInstance().LoadContent();
+    mWindow.setFramerateLimit(60);
     sf::Clock frameClock;
 
-    mWindow.setFramerateLimit(60);
-
+    screenmgr->SetWindow( &mWindow );
+    Create();
 
     while(mWindow.isOpen())
     {
-        //sf::Event event;
-
 		sf::Event event;
 		while( mWindow.pollEvent( event ) )
 		{
-			ScreenManager::GetInstance().GetCurrentScreen()->HandleEvent( event );
+			screenmgr->HandleEvent( event );
 		}
-        ScreenManager::GetInstance().HandleInput(mWindow);
-        ScreenManager::GetInstance().Update(frameClock.restart());
+		screenmgr->HandleInput(mWindow);
+
+		std::ostringstream oss;
+		oss << "fps: " << 1.f/frameClock.getElapsedTime().asSeconds();
+        mWindow.setTitle( oss.str() );
+
+        screenmgr->Update(frameClock.restart());
 
         mWindow.clear();
-        ScreenManager::GetInstance().Draw(mWindow);
+        screenmgr->Draw(mWindow);
         mWindow.display();
     }
 
-    ScreenManager::GetInstance().UnloadContent();
+	screenmgr->UnloadContent();
 }
