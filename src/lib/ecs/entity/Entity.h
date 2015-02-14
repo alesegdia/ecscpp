@@ -3,27 +3,22 @@
 
 #include <ecs/component/Component.h>
 #include <ecs/component/ComponentFlags.h>
-#include <core/memory/Pool.h>
-#include <core/memory/Poolable.h>
 #include <core/util/Locator.h>
 #include <ecs/entity/eid_t.h>
+#include <algorithm>    // std::find_if
+#include <typeinfo>
 
 #define COMPONENTMAP_SZ 10
 
 #include <rztl/pool.h>
 template <typename T> using Pool = rztl::Pool<T>;
 
-class Entity : public Poolable
+class Entity
 {
 public:
 	Entity()
 	{
 		_flags = 0;
-		_components.rehash(COMPONENTMAP_SZ);
-	}
-	~Entity()
-	{
-
 	}
 
 	void setEID(eid_t eid)
@@ -55,19 +50,26 @@ public:
 	}
 
 	template <typename ComponentType>
-	void addComponent(ComponentType* c)
+	void AttachComponent(ComponentType* c)
 	{
+		//_components.push_back( std::pair<std::type_index,Component*>(typeid(ComponentType),c) );
 		// se hará el casting de ComponentType* a Component*? dynamic_cast?
 		// tal vez quitar el template y dejar que lo castee automaticamente?
-		_components[std::type_index(typeid(ComponentType))] = c;
-		SetFlag<ComponentType>();
+		//_components[std::type_index(typeid(ComponentType))] = c;
+		if( _components.find( typeid(ComponentType) ) == _components.end() )
+		{
+			_components.insert( std::pair<std::type_index,Component*>(typeid(ComponentType),c) );
+			SetFlag<ComponentType>();
+		}
 		//_flags |= component_flags<ComponentType>::flags;
 	}
 
 	template <typename ComponentType>
 	ComponentType* getComponent()
 	{
-		return static_cast<ComponentType*>(_components[std::type_index(typeid(ComponentType))]);
+		//auto it = std::find_if(_components.begin(), _components.end(), [](std::pair<std::type_index,Component*> p) -> bool { return p.first == typeid(ComponentType); });
+		//return static_cast<ComponentType*>((*it).second);
+		return static_cast<ComponentType*>(_components[typeid(ComponentType)]);
 	}
 
 	ctflags_t getFlags()
@@ -99,17 +101,19 @@ public:
 
 		/* THIS IS FUCKING EVERYTHING!! */
 		// try to apply poolable to component and define it somehow in derived components
-		_components[std::type_index(typeid(ComponentType))]->cleanUp();
+		//_components[(typeid(ComponentType))]->cleanUp();
 
 		// clear it from the map? check algorithmic complexity and think if it's worth
-		Locator<Pool<ComponentType>>::get()->Destroy(
-			_components[std::type_index(typeid(ComponentType))]);
+		//Locator<Pool<ComponentType>>::get()->Destroy(
+		//_components[(typeid(ComponentType))];
 	}
 
 	void cleanUp()
 	{
+		/*
 		clearComponents();
-		//Locator<Pool<Entity>>::get()->Destroy(this);
+		Locator<Pool<Entity>>::get()->Destroy(this);
+		*/
 	}
 
 	void SetActive( bool active )
@@ -141,7 +145,8 @@ public:
 
 
 private:
-	std::unordered_map<std::type_index,Component*> _components;
+	std::map<std::type_index,Component*> _components;
+	//std::vector<std::pair<std::type_index,Component*>> _components;
 	ctflags_t _flags;
 	eid_t _eid;
 };

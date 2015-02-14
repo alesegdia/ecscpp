@@ -1,5 +1,5 @@
-#ifndef __EntityWorld_H__
-#define __EntityWorld_H__
+#ifndef __GameWorld_H__
+#define __GameWorld_H__
 
 #include "stdinc.h"
 #include <ecs/entity/eid_t.h>
@@ -8,6 +8,7 @@
 #include <ecs/entity/Entity.h>
 #include <ecs/system/System.h>
 #include <ecs/system/EntityProcessingSystem.h>
+#include <assert.h>
 
 typedef int EntityGroup;
 
@@ -35,23 +36,28 @@ public:
 		_free.push(id);
 	}
 
+	size_t Size()
+	{
+		return _free.size();
+	}
+
 private:
 	eid_t _nextKey;
 	std::stack<eid_t> _free;
 };
 
-class EntityWorld
+class GameWorld
 {
 public:
 
-	EntityWorld()
+	GameWorld()
 	{
-		for( int i = 0; i < 255; i++ )
+		for( int i = 0; i < 999999; i++ )
 		{
 			_eidpool.checkIn(i);
 		}
 	}
-	~EntityWorld() { }
+	~GameWorld() { }
 
 	/* Entity management *************** */
 	void deleteEntity(Entity* entity)
@@ -66,19 +72,10 @@ public:
 		// _groups[eg].push_back(e);
 	}
 
-	void pushEntity(Entity* entity)
-	{
-		eid_t entityID = _eidpool.checkOut();
-		entity->setEID(entityID);
-		notifyAdded(entity);
-	}
-	/* ********************************* */
-
 	void pushSystem(System* s)
 	{
 		// hace falta la variable? creo que no...
 		EntitySystem *eps;
-		System *rs;
 
 		_systems.push_back(s);
 
@@ -88,7 +85,33 @@ public:
 		}
 	}
 
-	void notifyAdded(Entity* e)
+	Entity* CreateEntity()
+	{
+		Entity* ret = NULL;
+		if( _eidpool.Size() <= 0 )
+		{
+			printf("NO MORE IDS!!\n");
+		}
+		else
+		{
+			ret = Locator<Pool<Entity>>::get()->Create();
+			ret->OnCreate();
+			eid_t entityID = _eidpool.checkOut();
+			ret->setEID(entityID);
+		}
+		assert(ret != NULL);
+		return ret;
+	}
+
+	template<typename ComponentType>
+	ComponentType* AcquireComponent()
+	{
+		return Locator<Pool<ComponentType>>::get()->Create();
+	}
+	 // llevar a entity como addcomponent y sacar del pool desde alli
+	 //
+
+	void NotifyAdded(Entity* e)
 	{
 		for (auto it : _epsystems)
 		{
@@ -106,16 +129,10 @@ public:
 
 	void process()
 	{
-		std::cout << "EntityWorld::process()\n";
 		for (auto it : _systems)
 		{
-			std::cout << "Processing a system...\n";
 			it->process();
 		}
-	}
-
-	void draw()
-	{
 	}
 
 	/* Group management **************** */
