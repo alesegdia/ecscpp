@@ -41,6 +41,11 @@ void Screen::Update(sf::Time delta)
 
 }
 
+void Screen::FixedUpdate()
+{
+
+}
+
 void Screen::Draw(sf::RenderWindow &window)
 {
 

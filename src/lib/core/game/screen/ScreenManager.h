@@ -22,6 +22,7 @@ class ScreenManager
         void HandleInput(sf::RenderWindow &window);
         void HandleEvent(sf::Event& event);
         void Update(sf::Time delta);
+        void FixedUpdate();
         void Draw(sf::RenderWindow &window);
 
 		ScreenPtr GetCurrentScreen();

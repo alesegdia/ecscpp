@@ -74,6 +74,11 @@ void ScreenManager::Update(sf::Time delta)
     currentScreen->Update(delta);
 }
 
+void ScreenManager::FixedUpdate()
+{
+	currentScreen->FixedUpdate();
+}
+
 void ScreenManager::Draw(sf::RenderWindow &window)
 {
     currentScreen->Draw(window);

@@ -20,6 +20,7 @@ class Screen
 		virtual void HandleEvent(sf::Event& event);
         virtual void HandleInput(sf::RenderWindow &window);
         virtual void Update(sf::Time delta);
+        virtual void FixedUpdate();
         virtual void Draw(sf::RenderWindow &window);
 
     protected:
