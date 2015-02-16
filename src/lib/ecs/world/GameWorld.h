@@ -50,14 +50,16 @@ class GameWorld
 {
 public:
 
-	GameWorld()
+	GameWorld() { }
+	~GameWorld() { }
+
+	void Prepare( int max_eids = 99999 )
 	{
-		for( int i = 0; i < 999999; i++ )
+		for( int i = 0; i < max_eids; i++ )
 		{
 			_eidpool.checkIn(i);
 		}
 	}
-	~GameWorld() { }
 
 	/* Entity management *************** */
 	void deleteEntity(Entity* entity)
@@ -85,23 +87,7 @@ public:
 		}
 	}
 
-	Entity* CreateEntity()
-	{
-		Entity* ret = NULL;
-		if( _eidpool.Size() <= 0 )
-		{
-			printf("NO MORE IDS!!\n");
-		}
-		else
-		{
-			ret = Locator<Pool<Entity>>::get()->Create();
-			ret->OnCreate();
-			eid_t entityID = _eidpool.checkOut();
-			ret->setEID(entityID);
-		}
-		assert(ret != NULL);
-		return ret;
-	}
+	virtual Entity* CreateEntity();
 
 	template<typename ComponentType>
 	ComponentType* AcquireComponent()
