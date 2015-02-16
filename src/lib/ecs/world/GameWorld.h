@@ -87,21 +87,25 @@ public:
 		}
 	}
 
-	virtual Entity* CreateEntity();
-
-	template<typename ComponentType>
-	ComponentType* AcquireComponent()
-	{
-		return Locator<Pool<ComponentType>>::get()->Create();
-	}
-	 // llevar a entity como addcomponent y sacar del pool desde alli
-	 //
-
 	void NotifyAdded(Entity* e)
 	{
 		for (auto it : _epsystems)
 		{
 			it->added(e);
+		}
+	}
+
+	void AddEntityToWorld(Entity* e)
+	{
+		if( _eidpool.Size() <= 0 )
+		{
+			printf("NO MORE IDS!!\n");
+		}
+		else
+		{
+			eid_t entityID = _eidpool.checkOut();
+			e->setEID(entityID);
+			this->NotifyAdded(e);
 		}
 	}
 
