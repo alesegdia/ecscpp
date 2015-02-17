@@ -45,8 +45,7 @@ public:
 
 	void OnCreate()
 	{
-		SetFlag<AliveComponent>();
-		SetFlag<ActiveComponent>();
+		alive = true;
 	}
 
 	template <typename ComponentType>
@@ -116,15 +115,14 @@ public:
 		*/
 	}
 
-	void SetActive( bool active )
+	void SetActive( bool alive )
 	{
-		if( active ) SetFlag<ActiveComponent>();
-		else UnsetFlag<ActiveComponent>();
+		this->alive = alive;
 	}
 
 	void Destroy()
 	{
-		UnsetFlag<AliveComponent>();
+		alive = false;
 	}
 
 	template <typename SomeComponent>
@@ -135,18 +133,13 @@ public:
 
 	bool IsAlive()
 	{
-		return IsFlagActive<AliveComponent>();
-	}
-
-	bool IsActive()
-	{
-		return IsFlagActive<ActiveComponent>();
+		return alive;
 	}
 
 
 private:
+	bool alive;
 	std::map<std::type_index,Component*> _components;
-	//std::vector<std::pair<std::type_index,Component*>> _components;
 	ctflags_t _flags;
 	eid_t _eid;
 };
