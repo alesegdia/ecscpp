@@ -4,7 +4,7 @@
 #include "stdinc.h"
 #include <ecs/entity/eid_t.h>
 #include <ecs/component/Component.h>
-#include <ecs/component/ComponentFlags.h>
+#include <ecs/component/ComponentTraits.h>
 #include <ecs/entity/Entity.h>
 #include <ecs/system/System.h>
 #include <ecs/system/EntityProcessingSystem.h>

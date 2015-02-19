@@ -2,8 +2,7 @@
 #define __ENTITY_H__
 
 #include <ecs/component/Component.h>
-#include <ecs/component/ComponentFlags.h>
-#include <ecs/component/ComponentIndices.h>
+#include <ecs/component/ComponentTraits.h>
 #include <core/util/Locator.h>
 #include <ecs/entity/eid_t.h>
 #include <algorithm>    // std::find_if
