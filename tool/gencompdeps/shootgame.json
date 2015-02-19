@@ -3,7 +3,8 @@
 	{ "name": "Render" },
 	{ "name": "Transform" },
 	{ "name": "Player" },
-	{ "name": "Physic" }
+	{ "name": "Physic" },
+	{ "name": "Health" }
 ]
 
 

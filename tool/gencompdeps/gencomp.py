@@ -1,3 +1,4 @@
+#!/usr/bin/python
 
 import sys
 import json
@@ -44,18 +45,14 @@ struct construct_flags<T>
 component_pools_template = '''
 #pragma once
 
-#include <core/memory/Pool.h>
 #include "Components.h"
 
-#define DEFAULT_POOL_SZ 128
-
-template <class T>
-struct pool_size
-{{ static const size_t size = DEFAULT_POOL_SZ; }};
+#include <rztl/pool.h>
+template <typename T> using Pool = rztl::Pool<T>;
 
 {0}'''
 
-single_component_pool_template = '''typedef Pool<{0}Component,pool_size<{0}Component>::size> C{0}Pool;'''
+single_component_pool_template = '''typedef Pool<{0}Component> C{0}Pool;'''
 
 component_pool_holder_template = '''
 #pragma once
@@ -67,9 +64,11 @@ public:
 
     ComponentPoolHolder()
     {{ {0}
+        Locator<EntityPool>::set(&entitypool);
     }}
 
 private: {1}
+    EntityPool entitypool;
 
 }};'''
 
