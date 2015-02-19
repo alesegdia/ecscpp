@@ -3,6 +3,8 @@
 
 #include <ecs/entity/EntityObserver.h>
 
+class GameWorld;
+
 class System
 {
 public:
@@ -12,6 +14,7 @@ public:
 	virtual void process();
 	// EntityObserver interface here?
 
+	GameWorld* world;
 
 };
 

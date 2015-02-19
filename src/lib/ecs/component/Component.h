@@ -3,6 +3,8 @@
 
 #include <stdinc.h>
 
+class Entity;
+
 class Component
 {
 public:
@@ -10,6 +12,8 @@ public:
 
 	/* Poolable interface */
 	virtual void cleanUp();
+
+	Entity* owner;
 };
 
 #endif

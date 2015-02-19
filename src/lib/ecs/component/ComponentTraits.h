@@ -13,3 +13,10 @@ struct component_flags
 };
 
 
+typedef std::uint32_t ctindex_t;
+
+template <class T>
+struct component_index
+{
+	static const ctindex_t index = 0;
+};

@@ -1,4 +1,5 @@
 #include "System.h"
+#include "../world/GameWorld.h"
 
 System::System()
 {

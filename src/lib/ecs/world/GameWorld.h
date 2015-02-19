@@ -80,11 +80,17 @@ public:
 		EntitySystem *eps;
 
 		_systems.push_back(s);
+		s->world = this;
 
 		if(eps = dynamic_cast<EntitySystem*>(s))
 		{
 			_epsystems.push_back(eps);
 		}
+	}
+
+	void clearEntities()
+	{
+		
 	}
 
 	void NotifyAdded(Entity* e)
@@ -105,6 +111,7 @@ public:
 		{
 			eid_t entityID = _eidpool.checkOut();
 			e->setEID(entityID);
+			//e->world = this;
 			this->NotifyAdded(e);
 		}
 	}

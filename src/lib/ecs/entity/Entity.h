@@ -3,6 +3,7 @@
 
 #include <ecs/component/Component.h>
 #include <ecs/component/ComponentFlags.h>
+#include <ecs/component/ComponentIndices.h>
 #include <core/util/Locator.h>
 #include <ecs/entity/eid_t.h>
 #include <algorithm>    // std::find_if
@@ -10,6 +11,7 @@
 
 #define COMPONENTMAP_SZ 10
 
+#include <unordered_map>
 #include <rztl/pool.h>
 template <typename T> using Pool = rztl::Pool<T>;
 
@@ -18,6 +20,7 @@ class Entity
 public:
 	Entity()
 	{
+		vec.resize(6);
 		_flags = 0;
 	}
 
@@ -51,15 +54,19 @@ public:
 	template <typename ComponentType>
 	void AttachComponent(ComponentType* c)
 	{
+		vec[component_index<ComponentType>::index] = c;
+			SetFlag<ComponentType>();
+			c->owner = this;
 		//_components.push_back( std::pair<std::type_index,Component*>(typeid(ComponentType),c) );
 		// se hará el casting de ComponentType* a Component*? dynamic_cast?
 		// tal vez quitar el template y dejar que lo castee automaticamente?
 		//_components[std::type_index(typeid(ComponentType))] = c;
+		/*
 		if( _components.find( typeid(ComponentType) ) == _components.end() )
 		{
 			_components.insert( std::pair<std::type_index,Component*>(typeid(ComponentType),c) );
-			SetFlag<ComponentType>();
 		}
+		*/
 		//_flags |= component_flags<ComponentType>::flags;
 	}
 
@@ -68,7 +75,8 @@ public:
 	{
 		//auto it = std::find_if(_components.begin(), _components.end(), [](std::pair<std::type_index,Component*> p) -> bool { return p.first == typeid(ComponentType); });
 		//return static_cast<ComponentType*>((*it).second);
-		return static_cast<ComponentType*>(_components[typeid(ComponentType)]);
+		//return static_cast<ComponentType*>(_components[typeid(ComponentType)]);
+		return static_cast<ComponentType*>(vec[component_index<ComponentType>::index]);
 	}
 
 	ctflags_t getFlags()
@@ -84,12 +92,15 @@ public:
 	/* Clear all components */
 	void clearComponents()
 	{
+		/*
 		_flags = 0;
 		for(auto it : _components)
 		{
-			(it.second)->cleanUp();
+			//(it.second)->cleanUp();
+			it->cleanUp();
 		}
 		_components.clear();
+		*/
 	}
 
 	/* Clear just one component */
@@ -139,7 +150,8 @@ public:
 
 private:
 	bool alive;
-	std::map<std::type_index,Component*> _components;
+	//std::unordered_map<std::type_index,Component*> _components;
+	std::vector<Component*> vec;
 	ctflags_t _flags;
 	eid_t _eid;
 };
