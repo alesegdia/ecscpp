@@ -19,8 +19,13 @@ class Entity
 public:
 	Entity()
 	{
-		vec.resize(6);
+		vec = new Component*[6];
 		_flags = 0;
+	}
+
+	~Entity()
+	{
+		delete [] vec;
 	}
 
 	void setEID(eid_t eid)
@@ -150,7 +155,7 @@ public:
 private:
 	bool alive;
 	//std::unordered_map<std::type_index,Component*> _components;
-	std::vector<Component*> vec;
+	Component** vec;
 	ctflags_t _flags;
 	eid_t _eid;
 };
