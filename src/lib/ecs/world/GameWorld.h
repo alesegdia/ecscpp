@@ -9,6 +9,8 @@
 #include <ecs/system/System.h>
 #include <ecs/system/EntityProcessingSystem.h>
 #include <assert.h>
+#include <core/util/Locator.h>
+#include <rztl/pool.h>
 
 typedef int EntityGroup;
 
@@ -88,9 +90,24 @@ public:
 		}
 	}
 
+	static bool IsEntityDead(Entity* e)
+	{
+		return !e->IsAlive();
+	}
+
 	void clearEntities()
 	{
-		
+		Pool<Entity>* entitypool = Locator<Pool<Entity>>::get();
+		for( auto it : _entities )
+		{
+			if( !it->IsAlive() )
+			{
+				entitypool->Destroy(it);
+				this->notifyDeleted(it);
+			}
+		}
+		_entities.erase(std::remove_if(_entities.begin(), _entities.end(),
+					[](Entity* e) { return !e->IsAlive(); }), _entities.end());
 	}
 
 	void NotifyAdded(Entity* e)
@@ -113,6 +130,7 @@ public:
 			e->setEID(entityID);
 			//e->world = this;
 			this->NotifyAdded(e);
+			this->_entities.push_back(e);
 		}
 	}
 
@@ -151,6 +169,7 @@ private:
 	EIDPool _eidpool;
 	SystemVector _systems;
 	EPSystemVector _epsystems;
+	EntityVector _entities;
 };
 
 

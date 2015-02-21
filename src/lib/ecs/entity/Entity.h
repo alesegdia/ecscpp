@@ -21,6 +21,7 @@ public:
 	{
 		vec = new Component*[6];
 		_flags = 0;
+		alive = true;
 	}
 
 	~Entity()
