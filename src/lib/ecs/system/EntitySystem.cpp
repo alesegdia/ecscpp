@@ -4,6 +4,7 @@
 EntitySystem::EntitySystem ()
 {
 	 // ctor
+	 _flags = 0;
 }
 
 EntitySystem::~EntitySystem ()

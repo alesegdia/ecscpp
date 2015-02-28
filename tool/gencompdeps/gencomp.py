@@ -133,20 +133,8 @@ def main():
     print(component_headers_file_content)
     print(component_pool_holder_file_content)
 
-    f = open("ComponentTraits.h", "w+")
-    f.write(component_traits_file_content)
-    f.close()
-
     f = open("ComponentPools.h", "w+")
     f.write(component_pool_file_content)
-    f.close()
-
-    f = open("ComponentsDecl.h", "w+")
-    f.write(components_decl_file_content)
-    f.close()
-
-    f = open("Components.h", "w+")
-    f.write(component_headers_file_content)
     f.close()
 
     f = open("ComponentPoolHolder.h", "w+")

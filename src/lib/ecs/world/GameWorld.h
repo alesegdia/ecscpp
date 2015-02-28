@@ -102,8 +102,8 @@ public:
 		{
 			if( !it->IsAlive() )
 			{
-				entitypool->Destroy(it);
 				this->notifyDeleted(it);
+				entitypool->Destroy(it);
 			}
 		}
 		_entities.erase(std::remove_if(_entities.begin(), _entities.end(),

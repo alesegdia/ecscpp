@@ -22,6 +22,13 @@ protected:
 	virtual void rmEntity(Entity* e);
 
 	void setFlags(ctflags_t flags);
+
+	template <class ComponentType>
+	void setFlag()
+	{
+		_flags |= ComponentTraits::GetFlag<ComponentType>();
+	}
+
 	ctflags_t _flags;
 
 

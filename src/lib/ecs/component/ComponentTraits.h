@@ -2,21 +2,32 @@
 #pragma once
 
 #include <cstdint>
+#include <cmath>
 
 typedef std::uint32_t ctflags_t;
-
-
-template <class T>
-struct component_flags
-{
-	static const ctflags_t flags = 0x00000000;
-};
-
-
 typedef std::uint32_t ctindex_t;
 
-template <class T>
-struct component_index
+class ComponentTraits
 {
-	static const ctindex_t index = 0;
+public:
+	template <typename T>
+	static ctflags_t GetFlag() {
+		static const ctflags_t flag = pow(2, ComponentTraits::GetIndex<T>());
+		return flag;
+	}
+
+	template <typename T>
+	static ctflags_t GetIndex() {
+		static const ctindex_t index = nextTypeIndex++;
+		return index;
+	}
+
+	static ctflags_t GetNumComponents() {
+		return nextTypeIndex;
+	}
+
+private:
+	static ctflags_t nextTypeIndex;
 };
+
+

@@ -2,6 +2,7 @@
 [
 	{ "name": "Render" },
 	{ "name": "Transform" },
+	{ "name": "RelativeTransform" },
 	{ "name": "Player" },
 	{ "name": "Physic" },
 	{ "name": "Health" },
