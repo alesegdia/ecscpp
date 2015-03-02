@@ -26,6 +26,19 @@ public:
 		return nextTypeIndex;
 	}
 
+	template <class First, class... Rest>
+	static ctflags_t ConstructFlags()
+	{
+		static const ctflags_t flags = ComponentTraits::GetFlag<First>() | ComponentTraits::GetFlag<Rest...>();
+		return flags;
+	}
+
+	template <class T>
+	static ctflags_t ConstructFlags()
+	{
+		return ComponentTraits::GetFlag<T>();
+	}
+
 private:
 	static ctflags_t nextTypeIndex;
 };
