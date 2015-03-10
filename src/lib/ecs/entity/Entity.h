@@ -152,6 +152,8 @@ public:
 		return alive;
 	}
 
+	std::string name;
+
 
 private:
 	bool alive;
