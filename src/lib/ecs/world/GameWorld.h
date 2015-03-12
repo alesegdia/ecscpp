@@ -118,34 +118,20 @@ public:
 		}
 	}
 
-	template <typename ComponentType>
-	ComponentType* AddComponent(Entity* e)
+	void AddEntityToWorld(Entity* e)
 	{
-		ComponentType* c = Locator<Pool<ComponentType>>::get()->Create();
-		e->AttachComponent(c);
-	}
-
-	Entity* AddEntity()
-	{
-		Entity* e = NULL;
 		if( _eidpool.Size() <= 0 )
 		{
 			printf("NO MORE IDS!!\n");
 		}
 		else
 		{
-			e = Locator<Pool<Entity>>::get()->Create();
 			eid_t entityID = _eidpool.checkOut();
 			e->setEID(entityID);
 			//e->world = this;
 			this->NotifyAdded(e);
 			this->_entities.push_back(e);
 		}
-		return e;
-	}
-
-	void AddEntityToWorld(Entity* e)
-	{
 	}
 
 	void notifyDeleted(Entity* e)
