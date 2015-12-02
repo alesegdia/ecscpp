@@ -9,7 +9,6 @@
 #include <ecs/system/System.h>
 #include <ecs/system/EntityProcessingSystem.h>
 #include <assert.h>
-#include <core/util/Locator.h>
 #include <rztl/pool.h>
 
 typedef int EntityGroup;
@@ -50,6 +49,10 @@ private:
 
 class GameWorld
 {
+
+private:
+	Pool<Entity> entityPool;
+
 public:
 
 	GameWorld() { }
@@ -97,7 +100,7 @@ public:
 
 	void clearEntities()
 	{
-		Pool<Entity>* entitypool = Locator<Pool<Entity>>::get();
+		Pool<Entity>* entitypool = &entityPool;
 		for( auto it : _entities )
 		{
 			if( !it->IsAlive() )

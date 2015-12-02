@@ -3,7 +3,6 @@
 
 #include <ecs/component/Component.h>
 #include <ecs/component/ComponentTraits.h>
-#include <core/util/Locator.h>
 #include <ecs/entity/eid_t.h>
 #include <algorithm>    // std::find_if
 #include <typeinfo>
