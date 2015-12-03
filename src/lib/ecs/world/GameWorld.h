@@ -66,6 +66,11 @@ public:
 		}
 	}
 
+	Pool<Entity>* GetEntityPool()
+	{
+		return &entityPool;
+	}
+
 	/* Entity management *************** */
 	void deleteEntity(Entity* entity)
 	{
