@@ -22,7 +22,6 @@ function parseFileName(url)
 end
 
 function define_test(testname, filename)
-	print(filename)
 	project(testname)
 		location 		"build"
 		language 		"C++"
@@ -34,7 +33,7 @@ function define_test(testname, filename)
 		configuration 	{ "Debug*" }
 			defines 	{ "_DEBUG", "DEBUG" }
 			flags		{ "Optimize" }
-			targetdir 	"bin"
+			targetdir 	"bin/tests"
 		configuration 	{ "x32" }
 			includedirs { "include64,include", "src/lib", "module/rztl/include" }
 			linkoptions { "-pg" }
