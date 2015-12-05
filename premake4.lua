@@ -47,7 +47,7 @@ end
 for file in lfs.dir([[src/tests]]) do
 	local name, ext = parseFileName(file)
 	if ext == "cpp" then
-		define_test(name, name .. "." .. ext)
+		define_test(name, file)
 	end
 end
 
