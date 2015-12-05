@@ -13,11 +13,12 @@ include_directories(fwecs ${RZTL_PATH})
 
 file(GLOB_RECURSE ECS_TESTS ./tests/*.cpp)
 
+# UNIT TESTS
 foreach(unit_test ${ECS_TESTS})
 	get_filename_component(unit_test_name ${unit_test} NAME_WE)
 	add_executable(${unit_test_name} ${unit_test})
 	include_directories(${unit_test_name} ${RZTL_PATH})
-	target_link_libraries(${unit_test_name} LINK_PUBLIC ${fwecs})
+	target_link_libraries(${unit_test_name} LINK_PUBLIC fwecs)
 	include_directories(${unit_test_name} lib)
 endforeach()
 
