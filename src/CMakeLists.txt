@@ -20,6 +20,9 @@ foreach(unit_test ${ECS_TESTS})
 	include_directories(${unit_test_name} ${RZTL_PATH})
 	target_link_libraries(${unit_test_name} LINK_PUBLIC fwecs)
 	include_directories(${unit_test_name} lib)
+	set_target_properties(${unit_test_name}
+		PROPERTIES
+		RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY}/bin/tests)
 endforeach()
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_HOME_DIRECTORY}/bin)
