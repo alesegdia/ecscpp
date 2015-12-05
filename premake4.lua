@@ -21,6 +21,8 @@ function parseFileName(url)
   return string.match(url, ".-([^\\/]-)%.?([^%.\\/]*)$")
 end
 
+-- valgrind does not work with -pg
+
 function define_test(testname, filename)
 	project(testname)
 		location 		"build"
@@ -36,10 +38,10 @@ function define_test(testname, filename)
 			targetdir 	"bin/tests"
 		configuration 	{ "x32" }
 			includedirs { "include64,include", "src/lib", "module/rztl/include" }
-			linkoptions { "-pg" }
+			linkoptions { --[[ "-pg"  --]] }
 		configuration 	{ "x64" }
 			includedirs { "include64,include", "src/lib", "module/rztl/include" }
-			linkoptions { "-pg", "-ftest-coverage", "-fprofile-arcs" }
+			linkoptions { --[[ "-pg", --]] "-ftest-coverage", "-fprofile-arcs" }
 end
 
 for file in lfs.dir([[src/tests]]) do
