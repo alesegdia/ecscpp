@@ -6,10 +6,12 @@ solution "ecscpp-project"
   platforms { "x64", "x32" }
 
 project "ecscpp"
+  location 		"build"
   kind "StaticLib"
   language "C++"
   buildoptions {"-std=c++11", "-pg" }
   includedirs {"include64,include", "/usr/include/freetype2", "src/lib", "module/rztl/include"}
+  targetdir "lib"
   files {
     "src/lib/**.cpp",
     "src/lib/**.h",
@@ -22,6 +24,7 @@ end
 function define_test(testname, filename)
 	print(filename)
 	project(testname)
+		location 		"build"
 		language 		"C++"
 		kind 			"WindowedApp"
 		files 			{ "src/tests/" .. filename }
