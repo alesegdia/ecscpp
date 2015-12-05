@@ -8,22 +8,27 @@ echo ""
 FILES=`find -type f -executable -exec sh -c "file -i '{}' | grep -q 'x-executable; charset=binary'" \; -print`
 for f in $FILES
 do
-	echo "==================="
+	echo "=========================="
 	printf "TESTING ${f:2} ......\n"
+
+	printf "Testcases\t"
 	$f
 	if [[ $? -eq 0 ]]; then
-		echo -e "Testcases \e[32msuccess\e[0m!"
+		printf "\e[32msuccess\e[0m!"
 	else
-		echo -e "Testcases \e[31mfailed\e[0m!"
+		printf "\e[31mfailed\e[0m!"
 	fi
+	printf "\n"
 
 	valgrind --leak-check=full -q $f
+	printf "Valgrind\t"
 	if [[ $? -eq 0 ]]; then
-		echo -e "Valgrind \e[32msuccess\e[0m!"
+		printf "\e[32msuccess\e[0m!"
 	else
-		echo -e "Valgrind \e[31mfailed\e[0m!"
+		printf "\e[31mfailed\e[0m!"
 	fi
 
-	echo ""
+	printf "\n"
+	printf "\n"
 done
 
