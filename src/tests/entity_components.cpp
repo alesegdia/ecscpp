@@ -18,11 +18,16 @@ int main( int argc, char** argv ) {
 	C4  c4[100];
 	C5  c5[100];
 
-	e.AttachComponent(c1);
 	e.AttachComponent(c2);
-	e.AttachComponent(c3);
 	e.AttachComponent(c4);
 	e.AttachComponent(c5);
+
+	assert(!e.IsFlagActive<C1>() && "Incoherent flag for C1");
+	assert(e.IsFlagActive<C2>() && "Incoherent flag for C2");
+	assert(!e.IsFlagActive<C3>() && "Incoherent flag for C3");
+	assert(e.IsFlagActive<C4>() && "Incoherent flag for C4");
+	assert(e.IsFlagActive<C5>() && "Incoherent flag for C5");
+
 
 	return 0;
 }
