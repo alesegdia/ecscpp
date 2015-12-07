@@ -18,36 +18,36 @@ class Entity
 public:
 	Entity()
 	{
-		vec = new Component*[25];
-		_flags = 0;
+		m_components = new Component*[25];
+		m_flags = 0;
 		alive = true;
 	}
 
 	~Entity()
 	{
-		delete [] vec;
+		delete [] m_components;
 	}
 
 	void setEID(eid_t eid)
 	{
-		_eid = eid;
+		m_eid = eid;
 	}
 
 	eid_t getEID()
 	{
-		return _eid;
+		return m_eid;
 	}
 
 	template <typename SomeComponent>
 	void SetFlag()
 	{
-		this->_flags |= ComponentTraits::GetFlag<SomeComponent>();
+		this->m_flags |= ComponentTraits::GetFlag<SomeComponent>();
 	}
 
 	template <typename SomeComponent>
 	void UnsetFlag()
 	{
-		this->_flags &= ~ComponentTraits::GetFlag<SomeComponent>();
+		this->m_flags &= ~ComponentTraits::GetFlag<SomeComponent>();
 	}
 
 	void OnCreate()
@@ -58,60 +58,37 @@ public:
 	template <typename ComponentType>
 	void AttachComponent(ComponentType* c)
 	{
-		vec[ComponentTraits::GetIndex<ComponentType>()] = c;
-			SetFlag<ComponentType>();
-			c->owner = this;
-		//_components.push_back( std::pair<std::type_index,Component*>(typeid(ComponentType),c) );
-		// se hará el casting de ComponentType* a Component*? dynamic_cast?
-		// tal vez quitar el template y dejar que lo castee automaticamente?
-		//_components[std::type_index(typeid(ComponentType))] = c;
-		/*
-		if( _components.find( typeid(ComponentType) ) == _components.end() )
-		{
-			_components.insert( std::pair<std::type_index,Component*>(typeid(ComponentType),c) );
-		}
-		*/
-		//_flags |= component_flags<ComponentType>::flags;
+		m_components[ComponentTraits::GetIndex<ComponentType>()] = c;
+		SetFlag<ComponentType>();
+		c->owner = this;
 	}
 
 	template <typename ComponentType>
 	ComponentType* getComponent()
 	{
-		//auto it = std::find_if(_components.begin(), _components.end(), [](std::pair<std::type_index,Component*> p) -> bool { return p.first == typeid(ComponentType); });
-		//return static_cast<ComponentType*>((*it).second);
-		//return static_cast<ComponentType*>(_components[typeid(ComponentType)]);
-		return static_cast<ComponentType*>(vec[ComponentTraits::GetIndex<ComponentType>()]);
+		return static_cast<ComponentType*>(m_components[ComponentTraits::GetIndex<ComponentType>()]);
 	}
 
 	ctflags_t getFlags()
 	{
-		return _flags;
+		return m_flags;
 	}
 
 	bool validateFlags(ctflags_t flags)
 	{
-		return ((_flags & flags) == flags);
+		return ((m_flags & flags) == flags);
 	}
 
 	/* Clear all components */
 	void clearComponents()
 	{
-		/*
-		_flags = 0;
-		for(auto it : _components)
-		{
-			//(it.second)->cleanUp();
-			it->cleanUp();
-		}
-		_components.clear();
-		*/
 	}
 
 	/* Clear just one component */
 	template <typename ComponentType>
 	void deleteComponent()
 	{
-		_flags &= ~(ComponentTraits::GetFlag<ComponentType>());
+		m_flags &= ~(ComponentTraits::GetFlag<ComponentType>());
 	}
 
 	void cleanUp()
@@ -129,9 +106,9 @@ public:
 	}
 
 	template <typename SomeComponent>
-	bool IsFlagActive()
+	bool HasComponent()
 	{
-		return _flags & ComponentTraits::GetFlag<SomeComponent>();
+		return m_flags & ComponentTraits::GetFlag<SomeComponent>();
 	}
 
 	bool IsAlive()
@@ -144,10 +121,10 @@ public:
 
 private:
 	bool alive;
-	//std::unordered_map<std::type_index,Component*> _components;
-	Component** vec;
-	ctflags_t _flags;
-	eid_t _eid;
+	Component** m_components;
+	ctflags_t m_flags;
+	eid_t m_eid;
+
 };
 
 typedef Pool<Entity> EntityPool;
