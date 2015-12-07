@@ -112,22 +112,10 @@ public:
 	void deleteComponent()
 	{
 		_flags &= ~(ComponentTraits::GetFlag<ComponentType>());
-
-		/* THIS IS FUCKING EVERYTHING!! */
-		// try to apply poolable to component and define it somehow in derived components
-		//_components[(typeid(ComponentType))]->cleanUp();
-
-		// clear it from the map? check algorithmic complexity and think if it's worth
-		//Locator<Pool<ComponentType>>::get()->Destroy(
-		//_components[(typeid(ComponentType))];
 	}
 
 	void cleanUp()
 	{
-		/*
-		clearComponents();
-		Locator<Pool<Entity>>::get()->Destroy(this);
-		*/
 	}
 
 	void SetActive( bool alive )
