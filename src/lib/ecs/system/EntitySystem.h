@@ -10,26 +10,30 @@ public:
 	EntitySystem ();
 	virtual ~EntitySystem ();
 
-	/* EntityObserver interface */
-	void added(Entity *e);
+    void added(Entity *e);
 	void deleted(Entity *e);
 
-	void process() override;
+    void process() override;
+
+    template <typename SomeComponent>
+    bool hasComponent()
+    {
+        return m_allFilter & ComponentTraits::GetFlag<SomeComponent>();
+    }
 
 protected:
 
 	virtual void addEntity(Entity* e);
-	virtual void rmEntity(Entity* e);
+    virtual void removeEntity(Entity* e);
 
-	void setFlags(ctflags_t flags);
+    void setFlags(ctflags_t flags);
+    ctflags_t getFlags()
+    {
+        return m_allFilter;
+    }
 
-	template <class ComponentType>
-	void setFlag()
-	{
-		_flags |= ComponentTraits::GetFlag<ComponentType>();
-	}
-
-	ctflags_t _flags;
+private:
+    ctflags_t m_allFilter;
 
 
 };
