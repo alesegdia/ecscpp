@@ -18,16 +18,27 @@ int main( int argc, char** argv ) {
 	C4  c4[100];
 	C5  c5[100];
 
-	e.AttachComponent(c2);
-	e.AttachComponent(c4);
-	e.AttachComponent(c5);
+	e.attachComponent(c2);
+	e.attachComponent(c4);
+	e.attachComponent(c5);
 
-	assert(!e.IsFlagActive<C1>() && "Incoherent flag for C1");
-	assert(e.IsFlagActive<C2>() && "Incoherent flag for C2");
-	assert(!e.IsFlagActive<C3>() && "Incoherent flag for C3");
-	assert(e.IsFlagActive<C4>() && "Incoherent flag for C4");
-	assert(e.IsFlagActive<C5>() && "Incoherent flag for C5");
+	assert(!e.hasComponent<C1>() && "Incoherent flag for C1");
+	assert(e.hasComponent<C2>() && "Incoherent flag for C2");
+	assert(!e.hasComponent<C3>() && "Incoherent flag for C3");
+	assert(e.hasComponent<C4>() && "Incoherent flag for C4");
+	assert(e.hasComponent<C5>() && "Incoherent flag for C5");
 
+    ctflags_t badbits1 = ComponentTraits::BuildBits<C1, C2, C3>();
+    ctflags_t badbits2 = ComponentTraits::BuildBits<C5>();
+    ctflags_t badbits3 = ComponentTraits::BuildBits<C2, C4>();
+
+    ctflags_t goodbits = ComponentTraits::BuildBits<C2, C4, C5>();
+
+    assert(!e.all(badbits1) && "Incoherent bits for C1, C2, C3");
+    assert(!e.all(badbits2) && "Incoherent bits for C5");
+    assert(!e.all(badbits3) && "Incoherent bits for C2, C4");
+
+    assert(e.all(goodbits) && "Should validate flags for C2, C4, C5");
 
 	return 0;
 }
