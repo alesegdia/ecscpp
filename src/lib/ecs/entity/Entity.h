@@ -16,112 +16,79 @@ template <typename T> using Pool = rztl::Pool<T>;
 class Entity
 {
 public:
-	Entity()
-	{
-		m_components = new Component*[25];
-		m_flags = 0;
-		alive = true;
-	}
+    Entity();
 
-	~Entity()
-	{
-		delete [] m_components;
-	}
+    ~Entity();
 
-	void setEID(eid_t eid)
-	{
-		m_eid = eid;
-	}
+    // EID accessors
+    void setEID(eid_t eid);
+    eid_t getEID();
 
-	eid_t getEID()
-	{
-		return m_eid;
-	}
+    // events
+    void onCreate();
 
 	template <typename SomeComponent>
-	void SetFlag()
-	{
-		this->m_flags |= ComponentTraits::GetFlag<SomeComponent>();
-	}
+    void setFlag()
+    {
+        this->m_flags |= ComponentTraits::GetFlag<SomeComponent>();
+    }
 
 	template <typename SomeComponent>
-	void UnsetFlag()
-	{
-		this->m_flags &= ~ComponentTraits::GetFlag<SomeComponent>();
-	}
+    void unsetFlag()
+    {
+        this->m_flags &= ~ComponentTraits::GetFlag<SomeComponent>();
+    }
 
-	void OnCreate()
-	{
-		alive = true;
-	}
 
-	template <typename ComponentType>
-	void AttachComponent(ComponentType* c)
-	{
-		m_components[ComponentTraits::GetIndex<ComponentType>()] = c;
-		SetFlag<ComponentType>();
-		c->owner = this;
-	}
+    template <typename ComponentType>
+    void attachComponent(ComponentType* c)
+    {
+        m_components[ComponentTraits::GetIndex<ComponentType>()] = c;
+        setFlag<ComponentType>();
+        c->owner = this;
+    }
 
 	template <typename ComponentType>
-	ComponentType* getComponent()
-	{
-		return static_cast<ComponentType*>(m_components[ComponentTraits::GetIndex<ComponentType>()]);
-	}
+    ComponentType* getComponent()
+    {
+        return static_cast<ComponentType*>(m_components[ComponentTraits::GetIndex<ComponentType>()]);
+    }
 
-	ctflags_t getFlags()
-	{
-		return m_flags;
-	}
+    /* Clear just one component */
+    template <typename ComponentType>
+    void deleteComponent()
+    {
+        m_flags &= ~(ComponentTraits::GetFlag<ComponentType>());
+    }
 
-	bool validateFlags(ctflags_t flags)
-	{
-		return ((m_flags & flags) == flags);
-	}
+
+    ctflags_t getFlags();
+
+    bool all(ctflags_t flags);
 
 	/* Clear all components */
-	void clearComponents()
-	{
-	}
+    void clearComponents();
 
-	/* Clear just one component */
-	template <typename ComponentType>
-	void deleteComponent()
-	{
-		m_flags &= ~(ComponentTraits::GetFlag<ComponentType>());
-	}
+    void cleanUp();
 
-	void cleanUp()
-	{
-	}
+    void setActive( bool alive );
 
-	void SetActive( bool alive )
-	{
-		this->alive = alive;
-	}
-
-	void Destroy()
-	{
-		alive = false;
-	}
+    void Destroy();
 
 	template <typename SomeComponent>
-	bool HasComponent()
+	bool hasComponent()
 	{
-		return m_flags & ComponentTraits::GetFlag<SomeComponent>();
+        return m_flags & ComponentTraits::GetFlag<SomeComponent>();
 	}
 
-	bool IsAlive()
-	{
-		return alive;
-	}
+    bool isAlive();
 
 	std::string name;
 
 
 private:
 	bool alive;
-	Component** m_components;
+	std::vector<Component*> m_components;
 	ctflags_t m_flags;
 	eid_t m_eid;
 
