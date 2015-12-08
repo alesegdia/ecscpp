@@ -17,7 +17,7 @@ void EntityProcessingSystem::process(Entity* e)
 
 void EntityProcessingSystem::process()
 {
-	for(auto it : _entities)
+	for(auto it : m_entities)
 	{
 		process(it.second);
 	}
@@ -25,14 +25,13 @@ void EntityProcessingSystem::process()
 
 void EntityProcessingSystem::addEntity(Entity* e)
 {
-	_entities[e->getEID()] = e;
+	m_entities[e->getEID()] = e;
 	onEntityAdded(e);
 }
 
-void EntityProcessingSystem::rmEntity(Entity* e)
+void EntityProcessingSystem::removeEntity(Entity* e)
 {
-	// ask in #gamedev, #c++ says vector until benchmarking
-	_entities.erase(e->getEID());
+	m_entities.erase(e->getEID());
 	onEntityDeleted(e);
 }
 

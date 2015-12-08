@@ -13,17 +13,17 @@ public:
 	virtual void process(Entity *e);
 
 	/* System interface */
-	void process();
+	void process() override;
 
 protected:
 	void addEntity(Entity* e) override;
-	void rmEntity(Entity* e) override;
+	void removeEntity(Entity* e) override;
 
 	virtual void onEntityAdded(Entity* e) {}
 	virtual void onEntityDeleted(Entity* e) {}
 
 
-	std::unordered_map<eid_t, Entity*> _entities;
+	std::unordered_map<eid_t, Entity*> m_entities;
 };
 
 #endif
