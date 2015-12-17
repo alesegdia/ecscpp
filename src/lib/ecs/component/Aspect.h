@@ -29,22 +29,28 @@ public:
 
 	bool all( ctflags_t flags )
 	{
-		return (flags & this->m_allFilter) == m_allFilter;
+		return (flags & m_allFilter) == m_allFilter;
 	}
 
 	bool any( ctflags_t flags )
 	{
-		return (flags & this->m_anyFilter) != 0;
+		return (flags & m_anyFilter) != 0 || m_anyFilter == 0;
 	}
 
 	bool none( ctflags_t flags )
 	{
-		return (flags & this->m_noneFilter) == 0;
+		return (flags & m_noneFilter) == 0;
 	}
 
 	bool fits( ctflags_t flags )
 	{
 		return all(flags) && any(flags) && none(flags);
+	}
+
+	template <typename ComponentType>
+	bool hasAll()
+	{
+		return m_allFilter & ComponentTraits::GetFlag<ComponentType>();
 	}
 
 private:
