@@ -29,7 +29,7 @@ public:
 	bool isAlive();
 
 	template <typename ComponentType>
-    void attachComponent(ComponentType* c)
+	inline void attachComponent(ComponentType* c)
     {
         m_components[ComponentTraits::GetIndex<ComponentType>()] = c;
 		this->m_flags |= ComponentTraits::GetFlag<ComponentType>();
@@ -37,13 +37,13 @@ public:
     }
 
 	template <typename ComponentType>
-    ComponentType* getComponent()
+	inline ComponentType* getComponent()
     {
         return static_cast<ComponentType*>(m_components[ComponentTraits::GetIndex<ComponentType>()]);
     }
 
     template <typename ComponentType>
-	void deleteComponent()
+	inline void deleteComponent()
     {
 		m_flags &= ~ComponentTraits::GetFlag<ComponentType>();
     }
