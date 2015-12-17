@@ -22,12 +22,9 @@ public:
     Entity();
     ~Entity();
 
-    // EID accessors
-    void setEID(eid_t eid);
     eid_t getEID();
 
-    // events
-	void Destroy();
+	void destroy();
 	bool isAlive();
 
 	template <typename ComponentType>
