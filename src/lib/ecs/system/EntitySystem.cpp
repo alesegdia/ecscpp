@@ -4,7 +4,6 @@
 EntitySystem::EntitySystem ()
 {
 	 // ctor
-     m_allFilter = 0;
 }
 
 EntitySystem::~EntitySystem ()
@@ -13,26 +12,30 @@ EntitySystem::~EntitySystem ()
 }
 
 
-void EntitySystem::setFlags(ctflags_t flags)
-{
-    m_allFilter = flags;
-}
-
 void EntitySystem::added(Entity* e)
 {
-    if(e->all(m_allFilter))
+	if(m_aspect.fits(e->getFlags()))
+	{
 		addEntity(e);
+	}
 }
 
 void EntitySystem::deleted(Entity* e)
 {
-    if(e->all(m_allFilter))
+	if(m_aspect.fits(e->getFlags()))
+	{
 		removeEntity(e);
+	}
 }
 
 void EntitySystem::process()
 {
 
+}
+
+Aspect &EntitySystem::aspect()
+{
+	return m_aspect;
 }
 
 void EntitySystem::addEntity(Entity*e)
