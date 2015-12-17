@@ -16,8 +16,10 @@ template <typename T> using Pool = rztl::Pool<T>;
 class Entity
 {
 public:
-    Entity();
 
+	friend class GameWorld;
+
+    Entity();
     ~Entity();
 
     // EID accessors
