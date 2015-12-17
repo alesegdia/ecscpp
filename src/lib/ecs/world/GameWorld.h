@@ -16,31 +16,13 @@ typedef int EntityGroup;
 class EIDPool
 {
 public:
-	EIDPool()
-	{
-		_nextKey = 0;
-	}
+	EIDPool();
 
-	eid_t checkOut()
-	{
-		eid_t ret;
-		if(!_free.empty())
-			ret = _free.top();
-		else
-			ret = _nextKey++;
-		_free.pop();
-		return ret;
-	}
+	eid_t checkOut();
 
-	void checkIn(eid_t id)
-	{
-		_free.push(id);
-	}
+	void checkIn(eid_t id);
 
-	size_t Size()
-	{
-		return _free.size();
-	}
+	size_t Size();
 
 private:
 	eid_t _nextKey;
@@ -50,122 +32,44 @@ private:
 class GameWorld
 {
 
+	static constexpr int MAX_ENTITIES = 1000 ;
+
 private:
-	Pool<Entity> entityPool;
+	Pool<Entity> m_entityPool;
 
 public:
 
-	GameWorld() { }
-	~GameWorld() { }
-
-	void Prepare( int max_eids = 99999 )
-	{
-		for( int i = 0; i < max_eids; i++ )
-		{
-			_eidpool.checkIn(i);
-		}
-	}
-
-	Pool<Entity>* GetEntityPool()
-	{
-		return &entityPool;
-	}
+	GameWorld(int max_eids=1000);
+	~GameWorld();
 
 	/* Entity management *************** */
-	void deleteEntity(Entity* entity)
+	void addEntity(Entity* e);
+	void removeEntity(Entity* entity);
+	void assignGroup(Entity* e, EntityGroup eg);
+	void addSystem(System* s);
+	void clearEntities();
+	void process();
+
+	template <typename ComponentType>
+	void attachComponent(Entity* e, ComponentType* c)
 	{
-		notifyDeleted(entity);
-		entity->clearComponents();
-		_eidpool.checkIn(entity->getEID());
+
 	}
 
-	void assignGroup(Entity* e, EntityGroup eg)
+	template <typename ComponentType>
+	void removeComponent(Entity* e)
 	{
-		// _groups[eg].push_back(e);
-	}
 
-	void pushSystem(System* s)
-	{
-		// hace falta la variable? creo que no...
-		EntitySystem *eps;
-
-		_systems.push_back(s);
-		s->world = this;
-
-		if(eps = dynamic_cast<EntitySystem*>(s))
-		{
-			_epsystems.push_back(eps);
-		}
-	}
-
-	static bool IsEntityDead(Entity* e)
-	{
-		return !e->IsAlive();
-	}
-
-	void clearEntities()
-	{
-		Pool<Entity>* entitypool = &entityPool;
-		for( auto it : _entities )
-		{
-			if( !it->IsAlive() )
-			{
-				this->notifyDeleted(it);
-				entitypool->Destroy(it);
-			}
-		}
-		_entities.erase(std::remove_if(_entities.begin(), _entities.end(),
-					[](Entity* e) { return !e->IsAlive(); }), _entities.end());
-	}
-
-	void NotifyAdded(Entity* e)
-	{
-		for (auto it : _epsystems)
-		{
-			it->added(e);
-		}
-	}
-
-	void AddEntityToWorld(Entity* e)
-	{
-		if( _eidpool.Size() <= 0 )
-		{
-			printf("NO MORE IDS!!\n");
-		}
-		else
-		{
-			eid_t entityID = _eidpool.checkOut();
-			e->setEID(entityID);
-			//e->world = this;
-			this->NotifyAdded(e);
-			this->_entities.push_back(e);
-		}
-	}
-
-	void notifyDeleted(Entity* e)
-	{
-		for (auto it : _epsystems)
-		{
-			it->deleted(e);
-		}
-	}
-
-	void process()
-	{
-		for (auto it : _systems)
-		{
-			it->process();
-		}
 	}
 
 	/* Group management **************** */
-	const std::vector<Entity*>& getGroup(EntityGroup eg)
-	{
-		return _groups[eg];
-	}
+	const std::vector<Entity*>& getGroup(EntityGroup eg);
 	/* ********************************* */
 
 private:
+
+	void notifyAdded(Entity* e);
+	void notifyDeleted(Entity* e);
 
 	/* Groups */
 	typedef std::vector<Entity*> EntityVector;
@@ -173,11 +77,11 @@ private:
 	typedef std::vector<System*> SystemVector;
 	typedef std::vector<EntitySystem*> EPSystemVector;
 
-	GroupMap _groups;
-	EIDPool _eidpool;
-	SystemVector _systems;
-	EPSystemVector _epsystems;
-	EntityVector _entities;
+	GroupMap m_groups;
+	EIDPool m_eidpool;
+	SystemVector m_systems;
+	EPSystemVector m_epsystems;
+	EntityVector m_entities;
 };
 
 
