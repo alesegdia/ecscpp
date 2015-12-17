@@ -7,7 +7,3 @@ Component::~Component()
 }
 
 
-void Component::cleanUp()
-{
-
-}
