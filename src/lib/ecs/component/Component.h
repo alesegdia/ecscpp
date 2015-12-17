@@ -10,10 +10,10 @@ class Component
 public:
 	virtual ~Component();
 
-	/* Poolable interface */
-	virtual void cleanUp();
+    /* Poolable interface */
+    virtual void cleanUp();
 
-	Entity* owner;
+    Entity* owner;
 };
 
 #endif
