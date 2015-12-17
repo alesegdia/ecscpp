@@ -1,5 +1,6 @@
 
 #include <ecs/component/Aspect.h>
+#include <ecs/system/EntityProcessingSystem.h>
 #include <cassert>
 
 class C1 {};
@@ -8,11 +9,27 @@ class C3 {};
 class C4 {};
 class C5 {};
 
+class S1 : public EntitySystem
+{
+
+public:
+	S1() {
+		aspect().all<C1, C2, C4>();
+	}
+};
+
 
 int main( int argc, char** argv ) {
 
 
 	{
+		S1 s1;
+		assert(s1.aspect().hasAll<C1>() && "Incoherent components for system");
+		assert(s1.aspect().hasAll<C2>() && "Incoherent components for system");
+		assert(!s1.aspect().hasAll<C3>() && "Incoherent components for system");
+		assert(s1.aspect().hasAll<C4>() && "Incoherent components for system");
+		assert(!s1.aspect().hasAll<C5>() && "Incoherent components for system");
+
 		Aspect a1, a2;
 
 		a1.all<C1, C3>();
@@ -74,6 +91,12 @@ int main( int argc, char** argv ) {
 		assert(a1.fits(ComponentTraits::BuildBits<C1, C2, C4>()));
 		assert(!a1.fits(ComponentTraits::BuildBits<C1, C2, C3, C5>()));
 		assert(!a1.fits(ComponentTraits::BuildBits<C1, C2, C5>()));
+
+		Aspect a2;
+		assert(a2.all(0));
+		assert(a2.any(0));
+		assert(a2.none(0));
+		assert(a2.fits(0));
 	}
 
 
