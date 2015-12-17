@@ -25,26 +25,14 @@ public:
     eid_t getEID();
 
     // events
-    void onCreate();
+	void Destroy();
+	bool isAlive();
 
-	template <typename SomeComponent>
-    void setFlag()
-    {
-        this->m_flags |= ComponentTraits::GetFlag<SomeComponent>();
-    }
-
-	template <typename SomeComponent>
-    void unsetFlag()
-    {
-        this->m_flags &= ~ComponentTraits::GetFlag<SomeComponent>();
-    }
-
-
-    template <typename ComponentType>
+	template <typename ComponentType>
     void attachComponent(ComponentType* c)
     {
         m_components[ComponentTraits::GetIndex<ComponentType>()] = c;
-        setFlag<ComponentType>();
+		this->m_flags |= ComponentTraits::GetFlag<ComponentType>();
         c->owner = this;
     }
 
@@ -54,42 +42,22 @@ public:
         return static_cast<ComponentType*>(m_components[ComponentTraits::GetIndex<ComponentType>()]);
     }
 
-    /* Clear just one component */
     template <typename ComponentType>
-    void deleteComponent()
+	void deleteComponent()
     {
-        m_flags &= ~(ComponentTraits::GetFlag<ComponentType>());
+		m_flags &= ~ComponentTraits::GetFlag<ComponentType>();
     }
-
 
     ctflags_t getFlags();
 
-    bool all(ctflags_t flags);
-
-	/* Clear all components */
-    void clearComponents();
-
-    void cleanUp();
-
-    void setActive( bool alive );
-
-    void Destroy();
-
-	template <typename SomeComponent>
-	bool hasComponent()
-	{
-        return m_flags & ComponentTraits::GetFlag<SomeComponent>();
-	}
-
-    bool isAlive();
 
 	std::string name;
 
 
 private:
-	bool alive;
+	bool alive = true;
 	std::vector<Component*> m_components;
-	ctflags_t m_flags;
+	ctflags_t m_flags = 0 ;
 	eid_t m_eid;
 
 };
