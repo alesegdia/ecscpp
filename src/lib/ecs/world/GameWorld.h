@@ -6,8 +6,8 @@
 #include <ecs/component/Component.h>
 #include <ecs/component/ComponentTraits.h>
 #include <ecs/entity/Entity.h>
+#include <ecs/system/EntitySystem.h>
 #include <ecs/system/System.h>
-#include <ecs/system/EntityProcessingSystem.h>
 #include <assert.h>
 #include <rztl/pool.h>
 

@@ -90,7 +90,7 @@ void GameWorld::addEntity(Entity *e)
 	else
 	{
 		eid_t entityID = m_eidpool.checkOut();
-		e->setEID(entityID);
+		e->m_eid = entityID;
 
 		this->notifyAdded(e);
 		this->m_entities.push_back(e);
@@ -99,17 +99,17 @@ void GameWorld::addEntity(Entity *e)
 
 void GameWorld::notifyAdded(Entity *e)
 {
-	for (auto it : m_epsystems)
+	for (EntitySystem* it : m_epsystems)
 	{
-		it->added(e);
+		it->entityAdded(e);
 	}
 }
 
 void GameWorld::notifyDeleted(Entity *e)
 {
-	for (auto it : m_epsystems)
+	for (EntitySystem* it : m_epsystems)
 	{
-		it->deleted(e);
+		it->entityDeleted(e);
 	}
 }
 
