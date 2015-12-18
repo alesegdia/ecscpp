@@ -2,15 +2,16 @@
 #define __ENTITYOBSERVER_H__
 
 #include "Entity.h"
+#include <ecs/component/Component.h>
 
 /**
  * @brief The IEntityObserver interface is used for an object that needs
  * to be notified about entity operations
  */
-class IEntityObserver
+class EntityObserver
 {
 public:
-	virtual ~IEntityObserver() {	}
+	virtual ~EntityObserver() {	}
 
 	/**
 	 * @brief called when an entity has been added to the world
@@ -25,10 +26,19 @@ public:
 	virtual void entityDeleted(Entity* e) = 0 ;
 
 	/**
-	 * @brief called when a component has been attached to or removed from an entity
+	 * @brief notification about a component added to an entity
 	 * @param e the entity
+	 * @param c the component added
 	 */
-	virtual void entityChanged(Entity* e) = 0 ;
+	virtual void entityComponentAdded(Entity* e, Component* c) = 0 ;
+
+	/**
+	 * @brief notification about a component just removed from an entity
+	 * @param e the entity
+	 * @param c the component removed
+	 */
+	virtual void entityComponentRemoved(Entity* e, Component* c) = 0 ;
+
 };
 
 #endif
