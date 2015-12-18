@@ -6,13 +6,21 @@
 
 class GameWorld;
 
+/**
+ * @brief The System class represents a piece of logic to be executed
+ * on each world step. Systems will be executed on insert order, but
+ * a scheduer could be done to delegate this task.
+ */
 class System
 {
 public:
 	System();
-	virtual ~System()=0;
+	virtual ~System()= 0 ;
 
-	virtual void process();
+	/**
+	 * @brief step to be executed
+	 */
+	virtual void process() ;
 
 };
 
