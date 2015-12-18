@@ -1,6 +1,6 @@
 
 #include <ecs/component/Aspect.h>
-#include <ecs/system/EntityProcessingSystem.h>
+#include <ecs/system/EntitySystem.h>
 #include <cassert>
 
 class C1 {};
@@ -19,9 +19,8 @@ public:
 };
 
 
-int main( int argc, char** argv ) {
-
-
+int main( int argc, char** argv )
+{
 	{
 		S1 s1;
 		assert(s1.aspect().hasAll<C1>() && "Incoherent components for system");
@@ -98,8 +97,6 @@ int main( int argc, char** argv ) {
 		assert(a2.none(0));
 		assert(a2.fits(0));
 	}
-
-
 
 	return 0;
 }

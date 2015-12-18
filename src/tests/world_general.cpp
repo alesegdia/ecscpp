@@ -1,15 +1,15 @@
 #include <ecs/component/Component.h>
 #include <ecs/entity/Entity.h>
-#include <ecs/system/EntityProcessingSystem.h>
+#include <ecs/system/EntitySystem.h>
 #include <ecs/world/GameWorld.h>
 #include <rztl/pool.h>
 
 int s1i, s2i, s3i, s4i;
 
-class S1 : public EntityProcessingSystem { void process(Entity *e) override { s1i++; } };
-class S2 : public EntityProcessingSystem { void process(Entity *e) override { s2i++; } };
-class S3 : public EntityProcessingSystem { void process(Entity *e) override { s3i++; } };
-class S4 : public EntityProcessingSystem { void process(Entity *e) override { s4i++; } };
+class S1 : public EntitySystem { void process(Entity *e) override { s1i++; } };
+class S2 : public EntitySystem { void process(Entity *e) override { s2i++; } };
+class S3 : public EntitySystem { void process(Entity *e) override { s3i++; } };
+class S4 : public EntitySystem { void process(Entity *e) override { s4i++; } };
 
 class C1 : public Component {};
 class C2 : public Component {};
@@ -18,25 +18,25 @@ class C4 : public Component {};
 
 int s11i, s22i, s33i, s44i;
 
-class S11 : public EntityProcessingSystem {
+class S11 : public EntitySystem {
 public:
 	S11() {	aspect().all<C1, C2>(); }
 	void process(Entity *e) { s11i++; }
 };
 
-class S22 : public EntityProcessingSystem {
+class S22 : public EntitySystem {
 public:
 	S22() {	aspect().all<C3>(); }
 	void process(Entity *e) { s22i++; }
 };
 
-class S33 : public EntityProcessingSystem {
+class S33 : public EntitySystem {
 public:
 	S33() {	aspect().all<C1, C4>(); }
 	void process(Entity *e) { s33i++; }
 };
 
-class S44 : public EntityProcessingSystem {
+class S44 : public EntitySystem {
 public:
 	S44() {	aspect().all<C2, C4>(); }
 	void process(Entity *e) { s44i++; }
