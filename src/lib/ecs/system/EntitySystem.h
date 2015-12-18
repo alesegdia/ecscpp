@@ -6,25 +6,54 @@
 #include <ecs/system/System.h>
 #include <ecs/component/Aspect.h>
 
-class EntitySystem : public System, public EntityObserver {
+class EntitySystem : public System, public IEntityObserver {
 
 public:
 	EntitySystem ();
-	virtual ~EntitySystem ();
+	virtual ~EntitySystem () ;
 
-    void added(Entity *e);
-	void deleted(Entity *e);
+	/**
+	 * @brief notification about an added entity
+	 * @param e the entity added
+	 */
+	void entityAdded(Entity *e) override ;
 
-    void process() override;
+	/**
+	 * @brief notification about an entity removed
+	 * @param e the entity removed
+	 */
+	void entityDeleted(Entity *e) override ;
 
+	/**
+	 * @brief notification about an entity changed
+	 * @param e the entity changed
+	 */
+	void entityChanged(Entity *e);
+
+	/**
+	 * @brief performs a step on all entities
+	 */
+	void process() override ;
+
+	/**
+	 * @brief gets the system aspect
+	 * @return a reference to the system aspect
+	 */
 	Aspect& aspect();
 
 protected:
+	/**
+	 * @brief performs a step over a single entity
+	 * @param e the entity to be processed
+	 */
+	virtual void process(Entity *e);
 
-	virtual void addEntity(Entity* e);
-    virtual void removeEntity(Entity* e);
+	virtual void onEntityAdded(Entity* e);
+	virtual void onEntityDeleted(Entity* e);
+	virtual void onEntityChanged(Entity* e);
 
 private:
+	std::unordered_map<eid_t, Entity*> m_entities;
 	Aspect m_aspect;
 
 };
