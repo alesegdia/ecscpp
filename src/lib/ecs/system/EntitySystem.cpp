@@ -30,6 +30,16 @@ void EntitySystem::entityDeleted(Entity* e)
 	}
 }
 
+void EntitySystem::entityComponentAdded(Entity *e, Component *c)
+{
+
+}
+
+void EntitySystem::entityComponentRemoved(Entity *e, Component *c)
+{
+
+}
+
 void EntitySystem::process()
 {
 	for(auto it : m_entities)

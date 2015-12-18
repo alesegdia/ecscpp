@@ -6,7 +6,7 @@
 #include <ecs/system/System.h>
 #include <ecs/component/Aspect.h>
 
-class EntitySystem : public System, public IEntityObserver {
+class EntitySystem : public System, public EntityObserver {
 
 public:
 	EntitySystem ();
@@ -24,11 +24,8 @@ public:
 	 */
 	void entityDeleted(Entity *e) override ;
 
-	/**
-	 * @brief notification about an entity changed
-	 * @param e the entity changed
-	 */
-	void entityChanged(Entity *e);
+	void entityComponentAdded(Entity *e, Component *c) override;
+	void entityComponentRemoved(Entity *e, Component *c) override;
 
 	/**
 	 * @brief performs a step on all entities
@@ -55,6 +52,7 @@ protected:
 private:
 	std::unordered_map<eid_t, Entity*> m_entities;
 	Aspect m_aspect;
+
 
 };
 
