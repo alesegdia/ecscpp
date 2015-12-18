@@ -6,8 +6,12 @@
 #include <ecs/system/System.h>
 #include <ecs/component/Aspect.h>
 
-class EntitySystem : public System, public EntityObserver {
-
+/**
+ * @brief The EntitySystem class is a system that performs an operation
+ * over a set of entities existing in the world that accepts its aspect
+ */
+class EntitySystem : public System, public EntityObserver
+{
 public:
 	EntitySystem ();
 	virtual ~EntitySystem () ;

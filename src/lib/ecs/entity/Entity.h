@@ -13,6 +13,9 @@
 #include <rztl/pool.h>
 template <typename T> using Pool = rztl::Pool<T>;
 
+/**
+ * @brief The Entity class represents an alive being in the world made up of components
+ */
 class Entity
 {
 public:

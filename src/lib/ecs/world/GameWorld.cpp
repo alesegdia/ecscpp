@@ -26,7 +26,6 @@ size_t EIDPool::Size()
 	return _free.size();
 }
 
-
 GameWorld::GameWorld(int max_eids)
 {
 	for( int i = 0; i < max_eids; i++ )
