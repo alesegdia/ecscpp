@@ -22,9 +22,21 @@ public:
     Entity();
     ~Entity();
 
+	/**
+	 * @brief gets the eid
+	 * @return the eid
+	 */
     eid_t getEID();
 
+	/**
+	 * @brief marks an entity as destroyed
+	 */
 	void destroy();
+
+	/**
+	 * @brief checks if alive
+	 * @return
+	 */
 	bool isAlive();
 
 	template <typename ComponentType>
@@ -47,8 +59,11 @@ public:
 		m_flags &= ~ComponentTraits::GetFlag<ComponentType>();
     }
 
+	/**
+	 * @brief gets the component flags
+	 * @return the component flags
+	 */
     ctflags_t getFlags();
-
 
 	std::string name;
 
